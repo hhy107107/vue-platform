@@ -1,0 +1,51 @@
+h1{
+font-weight: 300;
+margin: 0;
+font-size: 3.05em;
+color: #2c3e50;
+-webkit-margin-before: 0.67em;
+-webkit-margin-after: 0.67em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+display: block;
+}
+body {
+font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+font-size: 15px;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+color: #34495e;
+background-color: #fff;
+margin: 0;
+}
+.content {
+display: flex;
+justify-content: space-around;
+}
+.font-middle{
+font-size:1.0em;
+margin-left:40px;
+margin-top: 4px;
+}
+.font-big{
+font-size:1.5em;
+margin-left:30px
+}
+.div-flex{
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+.icon-top{
+    height: 30px;
+    width: 30px;
+    margin-left: 10px;
+}
+.line-horizontal{
+    height: 1px;
+    width: 100%;
+    background-color: #eeeeec;
+}
+.red-bg{
+    background-color: #dd1134 !important;
+}
