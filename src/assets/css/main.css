@@ -36,6 +36,29 @@ margin-left:30px
     align-content: center;
     align-items: center;
 }
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+.flex-between{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+}
+.flex-right{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.div-flex-column-center{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
 .icon-top{
     height: 30px;
     width: 30px;
@@ -48,4 +71,39 @@ margin-left:30px
 }
 .red-bg{
     background-color: #dd1134 !important;
+}
+.block-border{
+    border: 1px solid #eeeeec;
+}
+.block-border-no-bottom{
+    border-top: 1px solid #eeeeec;
+    border-left: 1px solid #eeeeec;
+    border-right: 1px solid #eeeeec;
+}
+.bg{
+    background-color: #fafafa;
+}
+.white{
+    background-color: #fff;
+}
+.margin-left-ten{
+    margin-left: 10px; 
+}
+.margin-left-twenty{
+    margin-left: 20px; 
+}
+.margin-left-forty{
+    margin-left: 40px; 
+}
+.margin-top-twenty{
+    margin-top: 20px; 
+}
+.margin-top-ten{
+    margin-top: 10px; 
+}
+.margin-twenty{
+    margin: 20px;
+}
+.margin-right-ten{
+    margin-right: 10px;
 }

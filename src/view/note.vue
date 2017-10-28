@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <el-row :gutter="20" class="title-bar" style="margin-bottom: 0px">
+      <el-row :gutter="20" class="title-bar flex-between" style="margin-bottom: 0px">
         <el-col :span="19">
           <div class="div-flex">
             <div class="grid-content bg-purple font-big-module">Home</div>
@@ -18,7 +18,7 @@
       </el-row>
       <div class="line-horizontal"></div>
     </div>
-    <main class="main">
+    <main class="main bg">
       <router-view></router-view>
     </main>
   </div>
@@ -50,17 +50,14 @@
   .font-middle-module{
     font-size:1.0em;
     margin-left:10px;
-    margin-top: 4px;
   }
   .font-big-module{
     font-size:1.5em;
     margin-left:30px;
-    margin-top:16px;
   }
   .main{
     height: 100%;
-    background-color: #fafafa;
-    padding: 20px;
+    padding: 20px 60px 20px 60px;
   }
  
 </style>
