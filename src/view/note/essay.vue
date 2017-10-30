@@ -44,7 +44,7 @@
             </el-row>
         </div>
       </div></el-col>
-      <el-col :span="18"><div class="grid-content margin-left-forty">
+      <el-col :span="17"><div class="grid-content margin-left-forty">
         <el-col :key=item.name v-for="(item, index) in essayList" :value="item.name">
           <el-card @click.native="typeClick" class="content-card">
             <div class="essay-title">
@@ -59,13 +59,12 @@
                 {{item.mark}} 2017.10
               </div>
             </div>
-            
           </el-card> 
         </el-col>  
       </div></el-col>
-      <el-col :span="1"><div class="div-flex-column-center margin-left-forty">
-        <el-button type="warning" icon="edit" style="margin-left: 4px;"></el-button>
-        <el-button type="primary" icon="share" class="margin-top-ten"></el-button>
+      <el-col :span="2"><div class="div-flex-column-center margin-left-forty">
+        <el-button type="warning" icon="el-icon-edit" style="margin-left: 4px;" v-on:click="addNote"></el-button>
+        <el-button type="primary" icon="el-icon-share" class="margin-top-ten" v-on:click="addNote"></el-button>
       </div></el-col>
     </el-row>
   </div>
@@ -75,6 +74,9 @@
     methods: {
       typeClick () {
         this.$message('这是一条消息提示')
+      },
+      addNote: function () {
+        this.$router.push({path: '/addNote'})
       }
     },
     computed: {
@@ -132,6 +134,8 @@
   }
   .collapse-hhy{
     border: 1px solid #ffffff !important;
+    padding-left: 20px;
+    background-color: #fff;
   }
   .label{
     background-color: #ae0123;

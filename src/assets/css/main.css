@@ -83,6 +83,10 @@ margin-left:30px
 .bg{
     background-color: #fafafa;
 }
+.main{
+    height: 100%;
+    padding: 20px 60px 20px 60px;
+}
 .white{
     background-color: #fff;
 }

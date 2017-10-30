@@ -11,7 +11,7 @@
         </el-col>
         <el-col :span=4>
           <el-tabs v-model="activeIndex" @tab-click="tabClick">
-            <el-tab-pane :key="item.name" v-for="(item, index) in noteOptions" :label="item.name" :name="item.route">
+            <el-tab-pane :key="item.route" v-for="(item, index) in noteOptions" :label="item.name" :name="item.route">
             </el-tab-pane>
           </el-tabs>
         </el-col>
@@ -29,7 +29,8 @@
   export default {
     data () {
       return {
-        msg: '测试页面'
+        msg: '测试页面',
+        activeIndex: 'essay'
       }
     },
     methods: {
@@ -55,9 +56,6 @@
     font-size:1.5em;
     margin-left:30px;
   }
-  .main{
-    height: 100%;
-    padding: 20px 60px 20px 60px;
-  }
+
  
 </style>

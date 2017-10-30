@@ -4,6 +4,7 @@ import note from '../view/note.vue'
 import comment from '../view/App.vue'
 import noteDiary from '../view/note/diary.vue'
 import noteEssay from '../view/note/essay.vue'
+import addNote from '../view/note/addNote.vue'
 
 Vue.use(Router)
 
@@ -23,6 +24,7 @@ export default new Router({
         {path: '/diary', component: noteDiary},
         {path: '/essay', component: noteEssay}
       ]
-    }
+    },
+    {path: '/addNote', component: addNote}
   ]
 })
