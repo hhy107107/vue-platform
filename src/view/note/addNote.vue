@@ -16,27 +16,44 @@
           </div>
 				</el-col>
 			</el-row>
-			<div class="line-horizontal"></div>
+      <div class="line-horizontal"></div>
     </div>
-    <div class="bg main">
-      <div id="editor">
-        <textarea :value="input" @input="update"></textarea>
-        <div v-html="compiledMarkdown"></div>
+    <div>
+      <div class="title-div flex-between">
+        <div class="title-left"><el-input v-model="inputTitle" class="title-left"></el-input></div>
+        <div class="title_right"><el-button type="warning" round>发表文章</el-button></div>
+      </div>
+      <div class="line-horizontal margin-top-twenty bar"></div>
+      <div  class="bg-white main">
+        <div id="editor" class="margin-top-twenty">
+          <textarea :value="input" @input="update"></textarea>
+          <div v-html="compiledMarkdown"></div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-    export default {
-      data: {
-        input: '# hello'
-      },
-      computed: {
-        compiledMarkdown: function () {
-          return this.$Marked().marked(this.input, { sanitize: true })
-        }
+  import marked from 'marked'
+  import _ from 'lodash'
+  export default {
+    data () {
+      return {
+        input: '# hello',
+        inputTitle: '标题'
       }
+    },
+    computed: {
+      compiledMarkdown: function () {
+        return marked(this.input, { sanitize: true })
+      }
+    },
+    methods: {
+      update: _.debounce(function (e) {
+        this.input = e.target.value
+      }, 300)
     }
+  }
 </script>
 <style>
   .edit-mode-text-clicked{
@@ -53,7 +70,6 @@
     padding-bottom: 10px;
   }
   html, body, #editor {
-  margin: 0;
   height: 100%;
   font-family: 'Helvetica Neue', Arial, sans-serif;
   color: #333;
@@ -82,4 +98,37 @@
   code {
     color: #f66;
   }
+  .bar{
+    height: 30px;
+  }
+  .title-div{
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 20px;
+  }
+  .title-left{
+    font-size: 1.4em;
+    color: #565665;
+    width: 100%;
+    margin-right: 20px;
+  }
+  .el-input__inner {
+    -webkit-appearance: none;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #ffffff;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #5a5e66;
+    display: inline-block;
+    font-size: inherit;
+    height: 60px;
+    line-height: 1;
+    outline: 0;
+    padding: 0 15px;
+    -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    width: 100%;
+}
 </style>

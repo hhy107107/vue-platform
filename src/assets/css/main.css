@@ -83,6 +83,9 @@ margin-left:30px
 .bg{
     background-color: #fafafa;
 }
+.bg-white{
+    background-color: #ffffff;
+}
 .main{
     height: 100%;
     padding: 20px 60px 20px 60px;
