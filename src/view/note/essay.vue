@@ -64,7 +64,7 @@
       </div></el-col>
       <el-col :span="2"><div class="div-flex-column-center margin-left-forty">
         <el-button type="warning" icon="el-icon-edit" style="margin-left: 4px;" v-on:click="addNote"></el-button>
-        <el-button type="primary" icon="el-icon-share" class="margin-top-ten" v-on:click="addNote"></el-button>
+        <el-button type="primary" icon="el-icon-share" class="margin-top-ten" v-on:click="testHeight"></el-button>
       </div></el-col>
     </el-row>
   </div>
@@ -77,6 +77,9 @@
       },
       addNote: function () {
         this.$router.push({path: '/addNote'})
+      },
+      testHeight: function () {
+        this.$router.push({path: '/testHeight'})
       }
     },
     computed: {
