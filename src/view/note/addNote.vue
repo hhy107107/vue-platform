@@ -24,7 +24,7 @@
         <div class="title_right"><el-button type="warning" round>发表文章</el-button></div>
       </div>
       <div class="line-horizontal margin-top-ten bar">
-          <i class="el-icon-picture-outline icon"></i>
+          <i class="el-icon-hhy-wxbbiaowang icon"></i>
       </div>
       <div  class="bg-white editor">
         <div id="editor" class="flex-between height-100">

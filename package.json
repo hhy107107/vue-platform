@@ -16,7 +16,7 @@
   "dependencies": {
     "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-plugin-transform-vue-jsx": "^3.5.0",
-    "element-ui": "^2.0.1",
+    "element-ui": "^2.0.3",
     "lodash": "^4.16.0",
     "marked": "^0.3.6",
     "node-sass": "^4.5.3",
