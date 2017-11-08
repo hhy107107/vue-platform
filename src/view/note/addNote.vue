@@ -24,8 +24,41 @@
         <div class="title_right"><el-button type="warning" round>发表文章</el-button></div>
       </div>
       <div class="line-horizontal margin-top-ten bar">
-          <i class="el-icon-hhy-wxbbiaowang icon"></i>
+          <i class="iconfont el-icon-hhy-weibiaoti102-copy icon" @click="dialogInertImgVisible = true"></i>
       </div>
+      <el-dialog title="插入图片" :visible.sync="dialogInertImgVisible">
+        <el-tabs type="border-card">
+          <el-tab-pane label="在线图片">
+            <div>
+              <div class="onlinePicTxt">请输入图片完整地址。</div>
+              <el-input class="el-input2"
+              placeholder="http://example.com/image.jpg"
+              prefix-icon="iconfont el-icon-hhy-weibiaoti102-copy"
+              v-model="inputImgAddress">
+              </el-input>
+            </div>
+          </el-tab-pane>
+          <el-tab-pane label="上传图片">
+            <div>
+              <div class="flex-between upload-img">
+                <el-input class="el-input2 img-input-left" :disabled="true"
+                v-model="inputImgAddress">
+                  <template slot="prepend">选择图片</template>
+                </el-input>
+                <el-button type="info" plain class="img-input-right">上传</el-button>
+              </div>
+              <div class="onlinePicTxt margin-top-ten">1、图片大小不能超过2M，2、支持格式：.jpg .gif .png .bmp。</div>
+              <div class="img-preview-div">
+                <img src="" class="img-preview">
+              </div>
+            </div>
+          </el-tab-pane>
+        </el-tabs>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogInertImgVisible = false">取 消</el-button>
+          <el-button type="primary" @click="dialogInertImgVisible = false">确 定</el-button>
+        </span>
+      </el-dialog>
       <div  class="bg-white editor">
         <div id="editor" class="flex-between height-100">
           <textarea :value="input" @input="update"></textarea>
@@ -42,7 +75,9 @@
     data () {
       return {
         input: '### hello',
-        inputTitle: '标题'
+        inputTitle: '标题',
+        dialogInertImgVisible: false,
+        inputImgAddress: ''
       }
     },
     computed: {
@@ -106,6 +141,36 @@
     border: 1px solid #ffffff;
     width: 100%;
   }
+  .el-input2 .el-input__inner:hover{
+    border: 1px solid #d5d9e0;
+    border-radius: 0px;
+  }
+  .el-input2 .el-input__inner{
+    background-color: #fff;
+    border: 1px solid #dfe4ed;
+    width: 100%;
+    border-radius: 0px;
+    padding-left: 32px;
+    
+  }
+  .el-input2 .el-input-group__append, .el-input-group__prepend {
+    background-color: #f5f7fa;
+    color: #878d99;
+    vertical-align: middle;
+    display: table-cell;
+    position: relative;
+    border-left: 1px solid #d8dce5;
+    border-radius: 0px;
+    padding: 0 20px;
+    width: 1px;
+    white-space: nowrap;
+    cursor: default;
+  }
+  .el-input.is-disabled .el-input__inner {
+    cursor: default;
+    background-color: #fff;
+  }
+ 
   .markdown{
     background-color: #f6f6f6;
     width: 50%;
@@ -121,5 +186,71 @@
   .icon{
     width: 40px;
     height: 40px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
   }
+  .icon:hover{
+    background-color: #cccccc;
+  }
+  .el-tabs--border-card {
+    border: 0px solid #d8dce5;
+    box-shadow:  0 0px 0px 0 rgba(0,0,0,0), 0 0 6px 0 rgba(0,0,0,0);;
+  }
+  .el-tabs--border-card>.el-tabs__header {
+    background-color: #ffffff; 
+    border-bottom: 1px solid #dfe4ed;
+    margin: 0;
+    
+ }
+ .el-tabs--border-card>.el-tabs__header .el-tabs__item {
+    -webkit-transition: all .3s cubic-bezier(.645,.045,.355,1);
+    transition: all .3s cubic-bezier(.645,.045,.355,1);
+    border: 1px solid transparent; 
+    margin-left: 1px;
+    margin-top: 1px;
+    color: #409EFF;
+    font-size: 1.1em;
+}
+.el-tabs--border-card>.el-tabs__header .el-tabs__item.is-active{
+  -webkit-transition: all .3s cubic-bezier(.645,.045,.355,1);
+    transition: all .3s cubic-bezier(.645,.045,.355,1);
+    border-left: 1px solid #dfe4ed; 
+    border-top: 1px solid #dfe4ed; 
+    border-bottom: 1px solid transparent; 
+    margin-left: 1px;
+    margin-top: 1px;
+    color: #878d99;
+}
+.el-dialog__body {
+    padding: 10px 20px;
+    color: #5a5e66;
+    line-height: 24px;
+    font-size: 14px;
+}
+.onlinePicTxt{
+  color: #b1b7c2;
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+.el-tabs--border-card>.el-tabs__content {
+    padding: 15px 2px 15px 2px;
+}
+.img-input-left{
+  width: 87%;
+}
+.img-input-right{
+  width: 12%;
+}
+.upload-img .el-button{
+  border-radius: 0px;
+}
+.img-preview-div{
+  width: 12em;
+  height: 12em;
+  border: 1px solid #d8dce5;
+  align-content: center;
+}
 </style>
