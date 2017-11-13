@@ -41,27 +41,36 @@
           <el-tab-pane label="上传图片">
             <div>
               <div class="flex-between upload-img">
-                <el-input class="el-input2 img-input-left" :disabled="true"
-                v-model="inputImgAddress">
-                  <template slot="prepend">选择图片</template>
-                </el-input>
+                <el-upload
+                  :action="getUploadApi"
+                  :name="file"
+                  :show-file-list="false"
+                  :on-success="handleAvatarSuccess">
+                    <el-input class="el-input2 img-input-left" :disabled="true"
+                    v-model="inputImgAddress">
+                      <template slot="prepend">选择图片</template>
+                    </el-input>
+                </el-upload>
                 <el-button type="info" plain class="img-input-right">上传</el-button>
               </div>
-              <div class="onlinePicTxt margin-top-ten">1、图片大小不能超过2M，2、支持格式：.jpg .gif .png .bmp。</div>
-              <div class="img-preview-div">
-                <img src="" class="img-preview">
+              <div class="onlinePicTxt margin-top-ten">1、图片大小不能超过2M；2、支持格式：.jpg .gif .png .bmp。</div>
+              <div class="flex-center margin-top-ten">
+                <div class="img-preview-div margin-top-ten">
+                  <img :src="imageUrl" class="img-preview">
+                </div>
               </div>
             </div>
           </el-tab-pane>
         </el-tabs>
         <span slot="footer" class="dialog-footer">
           <el-button @click="dialogInertImgVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogInertImgVisible = false">确 定</el-button>
+          <el-button type="primary" @click="addImg">确 定</el-button>
+          <input id="path" type="hidden" value="fileUrl" />
         </span>
       </el-dialog>
       <div  class="bg-white editor">
         <div id="editor" class="flex-between height-100">
-          <textarea :value="input" @input="update"></textarea>
+          <textarea :value="input" @input="update" id="editorInput"></textarea>
           <div v-html="compiledMarkdown" class="markdown"></div>
         </div>
       </div>
@@ -77,18 +86,58 @@
         input: '### hello',
         inputTitle: '标题',
         dialogInertImgVisible: false,
-        inputImgAddress: ''
+        inputImgAddress: '',
+        imageUrl: '',
+        fileUrl: ''
       }
     },
     computed: {
       compiledMarkdown: function () {
         return marked(this.input, { sanitize: true })
+      },
+      getUploadApi: function () {
+        var path = document.querySelector('#contextPath').value
+        return `${path}/upload`
+        // return 'http://127.0.0.1:8080/smallyellow/upload'
+      },
+      doGetCaretPosition: function () {
+        // 获取光标位置
+        var oField = document.getElementById('editorInput')
+        // Initialize
+        var iCaretPos = 0
+        // IE Support
+        if (document.selection) {
+          // Set focus on the element
+          oField.focus()
+          // To get cursor position, get empty selection range
+          var oSel = document.selection.createRange()
+          // Move selection start to 0 position
+          oSel.moveStart('character', -oField.value.length)
+          // The caret position is selection length
+          iCaretPos = oSel.text.length
+        } else if (oField.selectionStart || oField.selectionStart === '0') {
+          iCaretPos = oField.selectionStart
+          // Return results
+        }
+        return iCaretPos
       }
     },
     methods: {
       update: _.debounce(function (e) {
         this.input = e.target.value
-      }, 300)
+      }, 300),
+      handleAvatarSuccess (res, file) {
+        this.imageUrl = URL.createObjectURL(file.raw)
+        this.fileUrl = res.result.fileUrl
+      },
+      addImg (fileUrl) {
+        // this.input = this.input + '\n ![图片描述](' + this.fileUrl + ')\n'
+        this.dialogInertImgVisible = false
+        var length = this.doGetCaretPosition
+        var inputStart = this.input.substring(0, length)
+        var inputEnd = this.input.substring(length, this.input.length)
+        this.input = inputStart + '\n ![图片描述](' + this.fileUrl + ')\n' + inputEnd
+      }
     }
   }
 </script>
@@ -239,7 +288,7 @@
     padding: 15px 2px 15px 2px;
 }
 .img-input-left{
-  width: 87%;
+  width: 180%;
 }
 .img-input-right{
   width: 12%;
@@ -252,5 +301,15 @@
   height: 12em;
   border: 1px solid #d8dce5;
   align-content: center;
+}
+.img-preview{
+  width: 100%;
+  height: 100%;
+}
+.el-upload {
+    display: inline-block;
+    text-align: left;
+    cursor: default;
+    width: 100%;
 }
 </style>

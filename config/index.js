@@ -10,7 +10,7 @@ module.exports = {
     env: require('./prod.env'),
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'static',
+    assetsSubDirectory: 'static/smallyellow',
     assetsPublicPath: '/',
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as
@@ -32,9 +32,12 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/': {
+      '/smallyellow': {
         changeOrigin: true,
         target: 'http://127.0.0.1:9999',
+        pathRewrite: {
+          '^smallyellow': '/smallyellow'
+        }
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
