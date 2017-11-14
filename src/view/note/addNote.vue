@@ -24,8 +24,14 @@
         <div class="title_right"><el-button type="warning" round>发表文章</el-button></div>
       </div>
       <div class="line-horizontal margin-top-ten bar">
-          <i class="iconfont el-icon-hhy-weibiaoti102-copy icon" @click="dialogInertImgVisible = true"></i>
+          <i class="iconfont el-icon-hhy-font-bold icon" @click="contentBold"></i>
+          <i class="iconfont el-icon-hhy-xieti icon" @click="contentItalic"></i>
+          <i class="iconfont el-icon-hhy-tupian icon" @click="dialogInertImgVisible = true"></i>
+          <i class="iconfont el-icon-hhy-lianjie2 icon" @click="dialogInertLinkVisible = true"></i>
+          <i class="iconfont el-icon-hhy-daima icon" @click="contentCode"></i>
+          <i class="iconfont el-icon-hhy-bangzhu1 icon" @click="dialogHelpVisible = true"></i>
       </div>
+      <!-- 插入图片弹窗 -->
       <el-dialog title="插入图片" :visible.sync="dialogInertImgVisible">
         <el-tabs type="border-card">
           <el-tab-pane label="在线图片">
@@ -61,12 +67,60 @@
               </div>
             </div>
           </el-tab-pane>
+          <el-tab-pane label="断点续传">
+            <div>
+              <div class="flex-between upload-img">
+                <el-upload
+                  :action="getUploadApiForPoint"
+                  :name="file"
+                  :show-file-list="false"
+                  :on-success="handleAvatarSuccess">
+                    <el-input class="el-input2 img-input-left" :disabled="true"
+                    v-model="inputImgAddress">
+                      <template slot="prepend">选择文件</template>
+                    </el-input>
+                </el-upload>
+                <el-button type="info" plain class="img-input-right">上传</el-button>
+              </div>
+              <div class="onlinePicTxt margin-top-ten">1、文件大小不能超过1G；</div>
+              <div class="flex-left margin-top-ten">
+                  <el-button type="warning" plain size="small">暂停，模仿断网</el-button>
+                  <el-button type="primary" plain size="small">继续上传</el-button>
+              </div>
+            </div>
+          </el-tab-pane>
         </el-tabs>
         <span slot="footer" class="dialog-footer">
           <el-button @click="dialogInertImgVisible = false">取 消</el-button>
           <el-button type="primary" @click="addImg">确 定</el-button>
           <input id="path" type="hidden" value="fileUrl" />
         </span>
+      </el-dialog>
+      <!-- 插入链接弹窗 -->
+      <el-dialog title="添加链接" :visible.sync="dialogInertLinkVisible">
+        <div>
+          <div class="onlinePicTxt">请输入完整链接地址。</div>
+          <el-input class="el-input2"
+          placeholder="http://example.com/"
+          prefix-icon="iconfont el-icon-hhy-lianjie2"
+          v-model="inputLinkAddress"
+          id="linkDialogInput">
+          </el-input>
+        </div>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogInertLinkVisible = false">取 消</el-button>
+          <el-button type="primary" @click="addLink">确 定</el-button>
+        </span>
+      </el-dialog>
+      <!-- markdown语法帮助 -->
+      <el-dialog title="Markdown语法帮助" :visible.sync="dialogHelpVisible"
+      :modal=false
+      :lock-scroll=false
+      :close-on-click-modal=false
+      :close-on-press-escape=false
+      :append-to-body=true
+      class="test1"
+      id="helpDialog">
       </el-dialog>
       <div  class="bg-white editor">
         <div id="editor" class="flex-between height-100">
@@ -86,7 +140,10 @@
         input: '### hello',
         inputTitle: '标题',
         dialogInertImgVisible: false,
+        dialogInertLinkVisible: false,
+        dialogHelpVisible: false,
         inputImgAddress: '',
+        inputLinkAddress: '',
         imageUrl: '',
         fileUrl: ''
       }
@@ -99,15 +156,16 @@
         var path = document.querySelector('#contextPath').value
         return `${path}/upload`
         // return 'http://127.0.0.1:8080/smallyellow/upload'
-      },
+      }
+    },
+    methods: {
       doGetCaretPosition: function () {
         // 获取光标位置
         var oField = document.getElementById('editorInput')
-        // Initialize
         var iCaretPos = 0
-        // IE Support
+        // IE 支持
         if (document.selection) {
-          // Set focus on the element
+          // 设置焦点
           oField.focus()
           // To get cursor position, get empty selection range
           var oSel = document.selection.createRange()
@@ -117,12 +175,27 @@
           iCaretPos = oSel.text.length
         } else if (oField.selectionStart || oField.selectionStart === '0') {
           iCaretPos = oField.selectionStart
-          // Return results
         }
         return iCaretPos
-      }
-    },
-    methods: {
+      },
+      doGetSelectText: function () {
+        // 获取文本框选中的文字
+        var word = ''
+        var selectField = document.getElementById('editorInput')
+        if (document.selection) {
+          var sel = document.selection.createRange()
+          if (sel.text.length > 0) {
+            word = sel.text
+          }
+        } else if (selectField.selectionStart || selectField.selectionStart === '0') {
+          var startP = selectField.selectionStart
+          var endP = selectField.selectionEnd
+          if (startP !== endP) {
+            word = selectField.value.substring(startP, endP)
+          }
+        }
+        return word
+      },
       update: _.debounce(function (e) {
         this.input = e.target.value
       }, 300),
@@ -137,11 +210,85 @@
         var inputStart = this.input.substring(0, length)
         var inputEnd = this.input.substring(length, this.input.length)
         this.input = inputStart + '\n ![图片描述](' + this.fileUrl + ')\n' + inputEnd
+      },
+      addLink () {
+        this.dialogInertLinkVisible = false
+        var inputTxt = document.getElementById('linkDialogInput')
+        this.inertText('', '[链接说明文字](' + inputTxt.value + ')')
+      },
+      contentBold () {
+        var selectText = this.doGetSelectText()
+        if (selectText.length > 0) {
+          // 有选中文本，将选中文本加粗
+          // 获取光标位置
+          var position = this.doGetCaretPosition()
+          var inputStart = this.input.substring(0, position)
+          var inputEnd = this.input.substring(position + selectText.length, this.input.length)
+          this.input = inputStart + '**' + selectText + '**' + inputEnd
+        } else {
+          this.inertText('', '**重要文字**')
+        }
+      },
+      contentItalic () {
+        var selectText = this.doGetSelectText()
+        if (selectText.length > 0) {
+          // 有选中文本，将选中文本斜体
+          // 获取光标位置
+          var position = this.doGetCaretPosition()
+          var inputStart = this.input.substring(0, position)
+          var inputEnd = this.input.substring(position + selectText.length, this.input.length)
+          this.input = inputStart + '*' + selectText + '*' + inputEnd
+        } else {
+          this.inertText('', '*强调文字*')
+        }
+      },
+      contentCode () {
+        var selectText = this.doGetSelectText()
+        if (selectText.length > 0) {
+          // 有选中文本，将选中文本变成代码块
+          // 获取光标位置
+          var position = this.doGetCaretPosition()
+          var inputStart = this.input.substring(0, position)
+          var inputEnd = this.input.substring(position + selectText.length, this.input.length)
+          this.input = inputStart + '`' + selectText + '`' + inputEnd
+        } else {
+          this.inertText('', '`代码片段`')
+        }
+      },
+      inertText (position, content) {
+        // 在指定位置插入文字 （默认在光标所在位置）
+        if (position.length === 0) {
+          position = this.doGetCaretPosition()
+        }
+        var inputStart = this.input.substring(0, position)
+        var inputEnd = this.input.substring(position, this.input.length)
+        this.input = inputStart + content + inputEnd
       }
     }
   }
 </script>
 <style>
+  #helpDialog{
+    position: fixed ;
+    top: 20%;
+    right: 0;
+    bottom: 20%;
+    left: 80%;
+    overflow: visible;
+    margin: 0;
+  }
+  #helpDialog .el-dialog{
+    margin: 0px !important;
+    width: 100%;
+  }
+
+  .help-card{
+    z-index: 100;
+  }
+  .test{
+    display: flex;
+    flex-direction: column;
+  }
   .edit-mode-text-clicked{
     color: #409EFF;
     font-size: 1.3em;
@@ -172,6 +319,7 @@
   }
   .bar{
     height: 60px;
+    display: flex;
   }
   .title-div{
     padding-left: 40px;
@@ -246,13 +394,12 @@
   }
   .el-tabs--border-card {
     border: 0px solid #d8dce5;
-    box-shadow:  0 0px 0px 0 rgba(0,0,0,0), 0 0 6px 0 rgba(0,0,0,0);;
+    box-shadow:  0 0px 0px 0 rgba(0,0,0,0), 0 0 6px 0 rgba(0,0,0,0);
   }
   .el-tabs--border-card>.el-tabs__header {
     background-color: #ffffff; 
     border-bottom: 1px solid #dfe4ed;
     margin: 0;
-    
  }
  .el-tabs--border-card>.el-tabs__header .el-tabs__item {
     -webkit-transition: all .3s cubic-bezier(.645,.045,.355,1);

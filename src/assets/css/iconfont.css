@@ -1,11 +1,11 @@
 
 @font-face {
   font-family: 'iconfont';  /* project id 467075 */
-  src: url('//at.alicdn.com/t/font_467075_e3s8rx2gmxk9y66r.eot');
-  src: url('//at.alicdn.com/t/font_467075_e3s8rx2gmxk9y66r.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_467075_e3s8rx2gmxk9y66r.woff') format('woff'),
-  url('//at.alicdn.com/t/font_467075_e3s8rx2gmxk9y66r.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_467075_e3s8rx2gmxk9y66r.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_467075_40u1ys9495f2bj4i.eot');
+  src: url('//at.alicdn.com/t/font_467075_40u1ys9495f2bj4i.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_467075_40u1ys9495f2bj4i.woff') format('woff'),
+  url('//at.alicdn.com/t/font_467075_40u1ys9495f2bj4i.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_467075_40u1ys9495f2bj4i.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -19,4 +19,21 @@
 .el-icon-hhy-wxbbiaowang:before { content: "\e619"; } 
 /*图片*/
 .el-icon-hhy-weibiaoti102-copy:before { content: "\e605"; }
-
+/*图片窄*/
+.el-icon-hhy-tupian:before { content: "\e73f"; }
+/*链接*/
+.el-icon-hhy-lianjie1:before { content: "\e604"; }
+/*链接2*/
+.el-icon-hhy-lianjie2:before { content: "\e67b"; }
+/*斜体*/
+.el-icon-hhy-xieti:before { content: "\e693"; }
+/*代码*/
+.el-icon-hhy-daima:before { content: "\e996"; }
+/*线条*/
+.el-icon-hhy-hr:before { content: "\e6e0"; }
+/*粗体*/
+.el-icon-hhy-font-bold:before { content: "\e7d6"; }
+/*帮助*/
+.el-icon-hhy-bangzhu:before { content: "\e68b"; }
+/*帮助2*/
+.el-icon-hhy-bangzhu1:before { content: "\e60f"; }
