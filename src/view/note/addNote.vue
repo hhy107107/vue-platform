@@ -72,21 +72,28 @@
               <div class="flex-between upload-img">
                 <el-upload
                   :action="getUploadApiForPoint"
+                  :http-request="newUploadApi"
                   :name="file"
                   :show-file-list="false"
-                  :on-success="handleAvatarSuccess">
+                  :on-success="uploadFileSuccess"
+                  :on-progress="uploadFileProgress"
+                  :auto-upload="false"
+                  ref="uploadPoint">
                     <el-input class="el-input2 img-input-left" :disabled="true"
                     v-model="inputImgAddress">
                       <template slot="prepend">选择文件</template>
                     </el-input>
                 </el-upload>
-                <el-button type="info" plain class="img-input-right">上传</el-button>
+                <el-button type="info" plain class="img-input-right" @click="uploadFileForPoint">上传</el-button>
               </div>
               <div class="onlinePicTxt margin-top-ten">1、文件大小不能超过1G；</div>
+              <el-progress :percentage="uFProgress"></el-progress>
               <div class="flex-left margin-top-ten">
                   <el-button type="warning" plain size="small">暂停，模仿断网</el-button>
                   <el-button type="primary" plain size="small">继续上传</el-button>
+                  <el-button type="primary" plain size="small" @click="sendMessagePoint">发送消息</el-button>
               </div>
+              <div><input value="tempValue"></div>
             </div>
           </el-tab-pane>
         </el-tabs>
@@ -134,6 +141,10 @@
 <script>
   import marked from 'marked'
   import _ from 'lodash'
+  import Stomp from 'stompjs'
+  import SockJS from 'sockjs-client'
+  // import '../../assets/js/stomp.js'
+  // import '../../assets/js/sockjs.min.js'
   export default {
     data () {
       return {
@@ -145,7 +156,11 @@
         inputImgAddress: '',
         inputLinkAddress: '',
         imageUrl: '',
-        fileUrl: ''
+        fileUrl: '',
+        uFProgress: '0',
+        websocket: null,
+        stompClient: null,
+        tempValue: '测试：'
       }
     },
     computed: {
@@ -156,9 +171,52 @@
         var path = document.querySelector('#contextPath').value
         return `${path}/upload`
         // return 'http://127.0.0.1:8080/smallyellow/upload'
+      },
+      getUploadApiForPoint: function () {
+        var path = document.querySelector('#contextPath').value
+        return `${path}/upload`
       }
     },
     methods: {
+      sendMessagePoint () {
+        this.send()
+      },
+      uploadFileForPoint () {
+        // 提交上传
+        this.$refs.uploadPoint.submit()
+      },
+      newUploadApi () {
+        if ('WebSocket' in window) {
+          var socket = new SockJS('smallyellow/endpointSang')
+          this.stompClient = Stomp.over(socket)
+          this.stompClient.connect({}, (frame) => {
+            this.stompClient.subscribe('/topic/getResponse', (response) => {
+              this.$alert(JSON.parse(response.body).responseMessage)
+            })
+          })
+        } else {
+          this.$alert('Not support websocket')
+        }
+      },
+      messageSocket () {
+        this.$alert('收到消息')
+      },
+      openSocket () {
+        // 打开socket
+        this.$alert('执行打开')
+      },
+      send () {
+        this.stompClient.send('/welcome', {}, JSON.stringify({'name': '小黄'}))
+      },
+      uploadFileSuccess (response, file, fileList) {
+        // 上传文件成功回调
+        // this.$message('呵呵')
+      },
+      uploadFileProgress (event, file, fileList) {
+        // 上传文件回调
+        // this.$message('event.percent : ' + event.percent)
+        this.uFProgress = event.percent.toFixed(0)
+      },
       doGetCaretPosition: function () {
         // 获取光标位置
         var oField = document.getElementById('editorInput')

@@ -7,8 +7,13 @@ const vueLoaderConfig = require('./vue-loader.conf')
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
-
+node: {
+  fs: "empty"
+}
 module.exports = {
+  node: {
+    fs: "empty"
+  },
   entry: {
     app: './src/main.js'
   },
