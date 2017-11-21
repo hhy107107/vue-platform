@@ -72,7 +72,6 @@
               <div class="flex-between upload-img">
                 <el-upload
                   :action="getUploadApiForPoint"
-                  :http-request="newUploadApi"
                   :name="file"
                   :show-file-list="false"
                   :on-success="uploadFileSuccess"
@@ -88,10 +87,12 @@
               </div>
               <div class="onlinePicTxt margin-top-ten">1、文件大小不能超过1G；</div>
               <el-progress :percentage="uFProgress"></el-progress>
+              <el-progress :percentage="uFProgress2"></el-progress>
               <div class="flex-left margin-top-ten">
                   <el-button type="warning" plain size="small">暂停，模仿断网</el-button>
                   <el-button type="primary" plain size="small">继续上传</el-button>
                   <el-button type="primary" plain size="small" @click="sendMessagePoint">发送消息</el-button>
+                  <el-button type="primary" plain size="small" @click="send2">发送消息2</el-button>
               </div>
               <div><input value="tempValue"></div>
             </div>
@@ -157,8 +158,9 @@
         inputLinkAddress: '',
         imageUrl: '',
         fileUrl: '',
-        uFProgress: '0',
-        websocket: null,
+        uFProgress: 0,
+        uFProgress2: 0,
+        socket: null,
         stompClient: null,
         tempValue: '测试：'
       }
@@ -183,20 +185,26 @@
       },
       uploadFileForPoint () {
         // 提交上传
-        this.$refs.uploadPoint.submit()
-      },
-      newUploadApi () {
-        if ('WebSocket' in window) {
-          var socket = new SockJS('smallyellow/endpointSang')
-          this.stompClient = Stomp.over(socket)
-          this.stompClient.connect({}, (frame) => {
-            this.stompClient.subscribe('/topic/getResponse', (response) => {
-              this.$alert(JSON.parse(response.body).responseMessage)
-            })
+        this.socket = new SockJS('smallyellow/endpointSang')
+        this.stompClient = Stomp.over(this.socket)
+        this.stompClient.connect({}, (frame) => {
+          this.stompClient.subscribe('/topic/getResponse', (response) => {
+            this.$alert(JSON.parse(response.body).responseMessage)
           })
-        } else {
-          this.$alert('Not support websocket')
+        })
+        this.socket.onmessage = (e) => {
+          this.$alert('onmessage..' + e.data)
+          // uFProgress2 这里将显示进度
         }
+        this.socket.onopen = (e) => {
+          var r
+          for (var Key in e) {
+            r = r + '&' + '' + Key + '=' + e[Key] + ''
+          }
+          this.$alert('onopen..' + r)
+        }
+        // socket.open()
+        this.$refs.uploadPoint.submit()
       },
       messageSocket () {
         this.$alert('收到消息')
@@ -204,6 +212,9 @@
       openSocket () {
         // 打开socket
         this.$alert('执行打开')
+      },
+      send2 () {
+        this.socket.send('发送了消息send2')
       },
       send () {
         this.stompClient.send('/welcome', {}, JSON.stringify({'name': '小黄'}))

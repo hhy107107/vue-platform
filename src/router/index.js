@@ -6,6 +6,7 @@ import noteDiary from '../view/note/diary.vue'
 import noteEssay from '../view/note/essay.vue'
 import addNote from '../view/note/addNote.vue'
 import testHeight from '../view/note/testHeight.vue'
+import chat from '../view/chat.vue'
 
 Vue.use(Router)
 
@@ -27,6 +28,7 @@ export default new Router({
       ]
     },
     {path: '/addNote', component: addNote},
-    {path: '/testHeight', component: testHeight}
+    {path: '/testHeight', component: testHeight},
+    {path: '/chat', component: chat}
   ]
 })

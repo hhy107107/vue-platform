@@ -86,14 +86,14 @@
     <el-col :span="6"><div class="grid-content bg-purple-dark"></div></el-col>
   </el-row>
   <el-row style="text-align:center; margin:80px" class="content">
-    <el-col :span="4" v-for="(o, index) in 3" :key="o">
+    <el-col :span="4" v-for="(item, index) in appList" :key="o">
       <el-card :body-style="{ padding: '0px' }">
         <img src="https://vuejs.org/images/logo.png" class="center-image">
         <div style="padding: 14px;">
-          <span>记事本</span>
+          <span>{{item.name}}</span>
           <div class="bottom clearfix">
             <time class="time">{{ currentDate }}</time>
-            <router-link to="/diary">奇妙之旅</router-link>
+            <router-link :to=item.link>奇妙之旅</router-link>
             <!--<el-button type="text" class="button" @click="$route.push('/article')">奇妙之旅</el-button>-->
           </div>
         </div>
@@ -119,6 +119,11 @@
         console.log(key, keyPath)
       },
       handleIconClick () {}
+    },
+    computed: {
+      appList () {
+        return [{'name': '笔记本', 'link': '/diary'}, {'name': '客服中心', 'link': '/chat'}, {'name': '笔记本', 'link': '/diary'}]
+      }
     }
   }
 </script>
