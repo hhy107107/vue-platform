@@ -1,11 +1,11 @@
 
 @font-face {
   font-family: 'iconfont';  /* project id 467075 */
-  src: url('//at.alicdn.com/t/font_467075_40u1ys9495f2bj4i.eot');
-  src: url('//at.alicdn.com/t/font_467075_40u1ys9495f2bj4i.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_467075_40u1ys9495f2bj4i.woff') format('woff'),
-  url('//at.alicdn.com/t/font_467075_40u1ys9495f2bj4i.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_467075_40u1ys9495f2bj4i.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_467075_pxtwn7o2f4vd9529.eot');
+  src: url('//at.alicdn.com/t/font_467075_pxtwn7o2f4vd9529.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_467075_pxtwn7o2f4vd9529.woff') format('woff'),
+  url('//at.alicdn.com/t/font_467075_pxtwn7o2f4vd9529.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_467075_pxtwn7o2f4vd9529.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -37,3 +37,13 @@
 .el-icon-hhy-bangzhu:before { content: "\e68b"; }
 /*帮助2*/
 .el-icon-hhy-bangzhu1:before { content: "\e60f"; }
+/* 头像 */
+.el-icon-hhy-toux2:before { content: "\e628"; }
+/* 用户名 */
+.el-icon-hhy-touxiang1:before { content: "\e61d"; }
+/* 密码 */
+.el-icon-hhy-mima:before { content: "\e6a1"; }
+/* 客服管理中心 */
+.el-icon-hhy-kefu:before { content: "\e600"; }
+/* 用户 */
+.el-icon-hhy-yonghuuser:before { content: "\e629"; }
