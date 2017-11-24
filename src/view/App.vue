@@ -134,11 +134,18 @@
 </template>
 
 <script>
-  import { getUser, setUser } from '../assets/js/data.js'
   export default {
     created () {
-      this.isLogin = this.setLogin()
-      this.$message('当前登录1' + this.isLogin)
+      this.$https.get(`/initData`)
+      .then(res => {
+        if (res.data.code === 1) {
+          // 成功
+          this.setUserOnLine(res.data.result)
+        } else {
+          // 失败
+          this.loginDialogVisible = true
+        }
+      })
     },
     data () {
       return {
@@ -150,18 +157,11 @@
         activeName: 'first',
         inputUsername: '',
         inputPassword: '',
+        user: null,
         isLogin: false
       }
     },
     methods: {
-      setLogin () {
-        var user = getUser()
-        if (user === null) {
-          return false
-        } else {
-          return true
-        }
-      },
       handleSelect (key, keyPath) {
         console.log(key, keyPath)
       },
@@ -184,10 +184,8 @@
       },
       setUserOnLine (user) {
         this.loginDialogVisible = false
+        this.user = user
         this.isLogin = true
-        setUser(user)
-        this.isLogin = this.setLogin()
-        this.$message('当前登录' + this.isLogin)
       }
     },
     computed: {
