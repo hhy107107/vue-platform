@@ -71,6 +71,11 @@
 </template>
 <script>
   export default {
+    data () {
+      return {
+        activeNames: ''
+      }
+    },
     methods: {
       typeClick () {
         this.$message('这是一条消息提示')
@@ -80,6 +85,10 @@
       },
       testHeight: function () {
         this.$router.push({path: '/testHeight'})
+      },
+      handleChange () {
+        // 当热门推荐被修改的时候
+        this.$message('s' + this.essayList[0].id)
       }
     },
     computed: {
@@ -87,7 +96,9 @@
         return [{'name': '我知道'}, {'name': '测试啊测试'}, {'name': '这是一个类型'}, {'name': '测试2'}, {'name': '测试'}, {'name': '测试2'}]
       },
       essayList () {
-        return [{'name': '测试随笔', 'id': '1', 'content': '假若我是一朵雪花，翩翩的在半空里潇洒，我一定认清我的方向——飞扬，飞扬，飞扬，这地面上有我的方向。', 'mark': '小黄记于周六写代码时'}, {'name': '测试啊测试', 'id': '2', 'content': '内容2'}, {'name': '这是一个类型', 'id': '3', 'content': '内容3'}]
+        var list = [{'name': '测试随笔', 'id': '1', 'content': '假若我是一朵雪花，翩翩的在半空里潇洒，我一定认清我的方向——飞扬，飞扬，飞扬，这地面上有我的方向。', 'mark': '小黄记于周六写代码时'}, {'name': '测试啊测试', 'id': '2', 'content': '内容2'}, {'name': '这是一个类型', 'id': '3', 'content': '内容3'}]
+        this.activeNames = list[0].id
+        return list
       }
     }
   }

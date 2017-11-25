@@ -21,7 +21,7 @@
     <div class="c">
       <div class="title-div flex-between">
         <div class="title-left"><el-input v-model="inputTitle" class="title-left"></el-input></div>
-        <div class="title_right"><el-button type="warning" round>发表文章</el-button></div>
+        <div class="title_right"><el-button type="warning" round @click="dialogNoteTypeVisible = true">发表文章</el-button></div>
       </div>
       <div class="line-horizontal margin-top-ten bar">
           <i class="iconfont el-icon-hhy-font-bold icon" @click="contentBold"></i>
@@ -130,6 +130,30 @@
       class="test1"
       id="helpDialog">
       </el-dialog>
+      <el-dialog title="发表文章" :visible.sync="dialogNoteTypeVisible"
+      id="noteTypeDialog">
+        <div>
+          <el-tag
+            :key="tag"
+            v-for="tag in tags"
+            closable
+            :disable-transitions="false"
+            @close="handleClose(tag)"
+            :type="tag.type">
+            {{tag.name}}
+          </el-tag>
+          <el-input
+            class="input-new-tag"
+            v-if="tagInputVisible"
+            v-model="tagInputValue"
+            ref="saveTagInput"
+            size="small"
+            @keyup.enter.native="handleTagInputConfirm"
+            @blur="handleTagInputConfirm"
+          ></el-input>
+          <el-button v-else class="button-new-tag" size="small" @click="showTagInput">+ New Tag</el-button>
+        </div>
+      </el-dialog>
       <div  class="bg-white editor">
         <div id="editor" class="flex-between height-100">
           <textarea :value="input" @input="update" id="editorInput"></textarea>
@@ -154,6 +178,7 @@
         dialogInertImgVisible: false,
         dialogInertLinkVisible: false,
         dialogHelpVisible: false,
+        dialogNoteTypeVisible: false,
         inputImgAddress: '',
         inputLinkAddress: '',
         imageUrl: '',
@@ -162,7 +187,16 @@
         uFProgress2: 0,
         socket: null,
         stompClient: null,
-        tempValue: '测试：'
+        tempValue: '测试：',
+        tagInputVisible: false,
+        tagInputValue: '',
+        tags: [
+          { name: '标签一', type: '' },
+          { name: '标签二', type: 'success' },
+          { name: '标签三', type: 'info' },
+          { name: '标签四', type: 'warning' },
+          { name: '标签五', type: 'danger' }
+        ]
       }
     },
     computed: {
@@ -180,6 +214,25 @@
       }
     },
     methods: {
+      handleClose (tag) {
+        this.tags.splice(this.tags.indexOf(tag), 1)
+      },
+      handleTagInputConfirm () {
+        let tagInputValue = this.tagInputValue
+        if (tagInputValue) {
+          var tagValue = `{ name: "` + tagInputValue + `", type: "danger" }`
+          this.tags.push(tagValue)
+          this.$alert(this.tags)
+        }
+        this.tagInputVisible = false
+        this.tagInputValue = ''
+      },
+      showTagInput () {
+        this.tagInputVisible = true
+        this.$nextTick(_ => {
+          this.$refs.saveTagInput.$refs.input.focus()
+        })
+      },
       sendMessagePoint () {
         this.send()
       },
@@ -527,5 +580,13 @@
     text-align: left;
     cursor: default;
     width: 100%;
+}
+.font-middle-module{
+  font-size:1.0em;
+  margin-left:10px;
+}
+.font-big-module{
+  font-size:1.5em;
+  margin-left:30px;
 }
 </style>

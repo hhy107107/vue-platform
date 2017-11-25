@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <el-row :gutter="20" class="title-bar flex-between" style="margin-bottom: 0px">
+      <el-row class="title-bar flex-between" style="margin-bottom: 0px">
         <el-col :span="19">
           <div class="div-flex">
             <div class="grid-content bg-purple font-big-module">Home</div>
@@ -30,7 +30,7 @@
     data () {
       return {
         msg: '测试页面',
-        activeIndex: 'essay'
+        activeIndex: 'diary'
       }
     },
     methods: {

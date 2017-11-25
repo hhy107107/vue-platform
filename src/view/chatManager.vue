@@ -69,6 +69,17 @@ export default {
     selectUser (item) {
       this.toUserName = item.name
       this.toUserId = item.id
+      var lastId = ''
+      this.$https.get(`/message/chatList?to=` + this.toUserId + `&from=` + this.user.id + `&lastId=` + lastId)
+      .then(res => {
+        if (res.data.code === 1) {
+          // 成功
+          this.setUserOnLine(res.data.result)
+        } else {
+          // 失败
+          this.loginDialogVisible = true
+        }
+      })
     },
     connectChat () {
       // 连接
@@ -79,7 +90,22 @@ export default {
         this.chatContent += 'Connected ! \n'
       }
       this.chatWebsocket.onmessage = (evt) => {
-        this.chatContent += 'Received message: ' + JSON.parse(evt.data).message + '!\n'
+        var msg = JSON.parse(evt.data)
+        if (msg.type === 'CHAT') {
+          // 是聊天消息
+          this.chatContent += 'Received message: ' + JSON.parse(evt.data).message + '!\n'
+        } else if (msg.type === 'PUSH') {
+          // 是推送
+          var tag = msg.tag
+          if (tag === 'chat') {
+            // 聊天的推送
+            var event = msg.event
+            if (event === 4) {
+              // 发送成功
+              this.chatContent += '状态: 发送成功！\n'
+            }
+          }
+        }
       }
       this.chatWebsocket.onerror = (evt) => {
         this.chatContent += 'ERROR:' + evt.data
