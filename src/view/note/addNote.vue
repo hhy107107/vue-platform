@@ -21,7 +21,7 @@
     <div class="c">
       <div class="title-div flex-between">
         <div class="title-left"><el-input v-model="inputTitle" class="title-left"></el-input></div>
-        <div class="title_right"><el-button type="warning" round @click="dialogNoteTypeVisible = true">发表文章</el-button></div>
+        <div class="title_right"><el-button type="warning" round @click="showAddDialog">发表文章</el-button></div>
       </div>
       <div class="line-horizontal margin-top-ten bar">
           <i class="iconfont el-icon-hhy-font-bold icon" @click="contentBold"></i>
@@ -143,7 +143,7 @@
             {{tag.name}}
           </el-tag>
           <el-input
-            class="input-new-tag"
+            class="input-new-tag new-tag"
             v-if="tagInputVisible"
             v-model="tagInputValue"
             ref="saveTagInput"
@@ -168,9 +168,13 @@
   import _ from 'lodash'
   import Stomp from 'stompjs'
   import SockJS from 'sockjs-client'
+  import querystring from 'querystring'
   // import '../../assets/js/stomp.js'
   // import '../../assets/js/sockjs.min.js'
   export default {
+    created () {
+      // created
+    },
     data () {
       return {
         input: '### hello',
@@ -190,13 +194,7 @@
         tempValue: '测试：',
         tagInputVisible: false,
         tagInputValue: '',
-        tags: [
-          { name: '标签一', type: '' },
-          { name: '标签二', type: 'success' },
-          { name: '标签三', type: 'info' },
-          { name: '标签四', type: 'warning' },
-          { name: '标签五', type: 'danger' }
-        ]
+        tags: null
       }
     },
     computed: {
@@ -214,18 +212,36 @@
       }
     },
     methods: {
+      // 显示发表文章弹窗
+      showAddDialog () {
+        this.dialogNoteTypeVisible = true
+        this.getTypeList()
+      },
+      // 获取类型列表
+      getTypeList () {
+        this.$https.get(`/note/typeList`)
+        .then(res => {
+          this.tags = res.data.result
+        })
+      },
+      // 添加类型
+      addType () {
+        this.$https.post(`/note/typeAdd`, querystring.stringify({
+          name: this.tagInputValue
+        }))
+        .then(res => {
+          if (res.data.code === 1) {
+            this.getTypeList()
+            this.tagInputValue = ''
+            this.tagInputVisible = false
+          }
+        })
+      },
       handleClose (tag) {
         this.tags.splice(this.tags.indexOf(tag), 1)
       },
       handleTagInputConfirm () {
-        let tagInputValue = this.tagInputValue
-        if (tagInputValue) {
-          var tagValue = `{ name: "` + tagInputValue + `", type: "danger" }`
-          this.tags.push(tagValue)
-          this.$alert(this.tags)
-        }
-        this.tagInputVisible = false
-        this.tagInputValue = ''
+        this.addType()
       },
       showTagInput () {
         this.tagInputVisible = true
@@ -390,6 +406,9 @@
   }
 </script>
 <style>
+  .new-tag{
+    width: 90px;
+  }
   #helpDialog{
     position: fixed ;
     top: 20%;
