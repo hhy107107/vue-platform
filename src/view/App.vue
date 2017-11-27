@@ -1,6 +1,6 @@
 <template>
   <div class="header-hhy">
-  <el-row :gutter="20">
+  <el-row>
     <el-col :span="12"><div class="grid-content bg-purple font-big">
       Home
       <i class="iconfont el-icon-hhy-toux2 userface" :class="{'userLogin': isLogin}" @click="showLogin"></i> 

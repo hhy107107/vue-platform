@@ -133,25 +133,33 @@
       <el-dialog title="发表文章" :visible.sync="dialogNoteTypeVisible"
       id="noteTypeDialog">
         <div>
-          <el-tag
-            :key="tag"
-            v-for="tag in tags"
-            closable
-            :disable-transitions="false"
-            @close="handleClose(tag)"
-            :type="tag.type">
-            {{tag.name}}
-          </el-tag>
-          <el-input
-            class="input-new-tag new-tag"
-            v-if="tagInputVisible"
-            v-model="tagInputValue"
-            ref="saveTagInput"
-            size="small"
-            @keyup.enter.native="handleTagInputConfirm"
-            @blur="handleTagInputConfirm"
-          ></el-input>
-          <el-button v-else class="button-new-tag" size="small" @click="showTagInput">+ New Tag</el-button>
+          <div class="text-hint">给精心撰写的文章设置一个分类</div>
+          <div class="tag-content">
+            <el-tag class="tag-item" 
+              :class="{'tag-clicked': tagClickId === tag.id}"
+              :key="tag"
+              v-for="tag in tags"
+              closable
+              :disable-transitions="false"
+              @close="deleteType(tag)"
+              :type="tag.type">
+              <span v-on:click="tagSelect(tag)">{{tag.name}}</span>
+            </el-tag>
+            <el-input
+              class="input-new-tag new-tag"
+              v-if="tagInputVisible"
+              v-model="tagInputValue"
+              ref="saveTagInput"
+              size="small"
+              @keyup.enter.native="handleTagInputConfirm"
+              @blur="handleTagInputConfirm"
+            ></el-input>
+            <el-button v-else class="button-new-tag" size="small" @click="showTagInput">+ 新的分类</el-button>
+          </div>
+          <div slot="footer" class="tag-footer">
+            <el-button @click="dialogNoteTypeVisible = false">取 消</el-button>
+            <el-button type="primary" @click="addNote">确 定</el-button>
+          </div>
         </div>
       </el-dialog>
       <div  class="bg-white editor">
@@ -194,7 +202,8 @@
         tempValue: '测试：',
         tagInputVisible: false,
         tagInputValue: '',
-        tags: null
+        tags: null,
+        tagClickId: 0
       }
     },
     computed: {
@@ -212,10 +221,39 @@
       }
     },
     methods: {
+      // 类型标签被选中
+      tagSelect (tag) {
+        this.tagClickId = tag.id
+      },
+      // 发表文章
+      addNote () {
+        this.$https.post(`/note/addNote`, querystring.stringify({
+          typeId: this.tagClickId,
+          title: this.inputTitle,
+          content: this.input
+        }))
+        .then(res => {
+          if (res.data.code === 1) {
+            this.$message('文章发表成功')
+            this.dialogNoteTypeVisible = false
+          }
+        })
+      },
       // 显示发表文章弹窗
       showAddDialog () {
         this.dialogNoteTypeVisible = true
         this.getTypeList()
+      },
+      // 删除笔记类型
+      deleteType (tag) {
+        this.$https.post(`/note/typeDel`, querystring.stringify({
+          id: tag.id
+        }))
+        .then(res => {
+          if (res.data.code === 1) {
+            this.tags.splice(this.tags.indexOf(tag), 1)
+          }
+        })
       },
       // 获取类型列表
       getTypeList () {
@@ -236,9 +274,6 @@
             this.tagInputVisible = false
           }
         })
-      },
-      handleClose (tag) {
-        this.tags.splice(this.tags.indexOf(tag), 1)
       },
       handleTagInputConfirm () {
         this.addType()
@@ -406,6 +441,23 @@
   }
 </script>
 <style>
+  .tag-item{
+    cursor: pointer;
+  }
+  .tag-clicked{
+    border: 1px solid rgba(64, 163, 255, 0.918);
+    background-color: rgba(64, 163, 255, 0.205);
+  }
+  .tag-footer{
+    text-align: right
+  }
+  .tag-content{
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  .el-tag{
+    margin-right: 10px;
+  }
   .new-tag{
     width: 90px;
   }

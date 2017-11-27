@@ -5,6 +5,7 @@ import comment from '../view/App.vue'
 import noteDiary from '../view/note/diary.vue'
 import noteEssay from '../view/note/essay.vue'
 import addNote from '../view/note/addNote.vue'
+import noteDetail from '../view/note/noteDetail.vue'
 import testHeight from '../view/note/testHeight.vue'
 import chat from '../view/chat.vue'
 import chatManager from '../view/chatManager.vue'
@@ -29,6 +30,7 @@ export default new Router({
       ]
     },
     {path: '/addNote', component: addNote},
+    {path: '/noteDetail', component: noteDetail},
     {path: '/testHeight', component: testHeight},
     {path: '/chat', component: chat},
     {path: '/chatManager', component: chatManager}

@@ -21,7 +21,7 @@
             </div>
             <el-row class="type-row">
                 <el-col :key=item.name v-for="(item, index) in typeList" :span=item.name.length*2 :offset=2 :value="item.name">
-                  <el-card @click.native="typeClick" class="type-card">
+                  <el-card @click.native="typeClick(item)" class="type-card">
                     {{item.name}}
                   </el-card> 
                 </el-col>
@@ -35,7 +35,7 @@
             <el-row>
               <el-col>
                 <el-collapse class="collapse-hhy" v-model="activeNames" @change="handleChange">
-                  <el-collapse-item :key=item.id v-for="(item, index) in essayList" :title="item.name" :name="item.id">
+                  <el-collapse-item :key=item.id v-for="(item, index) in essayList" :title="item.title" :name="item.id">
                     <div>{{item.content}}</div>
                     <div class="text-algin-right">查看更多</div>
                   </el-collapse-item>
@@ -44,24 +44,33 @@
             </el-row>
         </div>
       </div></el-col>
-      <el-col :span="17"><div class="grid-content margin-left-forty">
-        <el-col :key=item.name v-for="(item, index) in essayList" :value="item.name">
-          <el-card @click.native="typeClick" class="content-card">
-            <div class="essay-title">
-              {{item.name}}
-            </div>
-            <div class="essay-detail">
-              {{item.content}}
-            </div>
-            <div class="flex-right">
-              <div class="margin-right-ten">——</div>
-              <div class="essay-mark">
-                {{item.mark}} 2017.10
-              </div>
-            </div>
-          </el-card> 
-        </el-col>  
-      </div></el-col>
+      <el-col :span="17">
+        <div class="div-flex-column-right">
+          <div class="grid-content margin-left-forty width-100">
+            <el-col :key=item.name v-for="(item, index) in essayList" :value="item.name">
+              <el-card @click.native="noteClick(item)" class="content-card">
+                <div class="essay-title">
+                  {{item.title}}
+                </div>
+                <div class="essay-detail">
+                  {{item.content}}
+                </div>
+                <div class="flex-right">
+                  <div class="margin-right-ten">——</div>
+                  <div class="essay-mark">
+                    {{item.author}} {{getDate(item.createTime)}} 
+                  </div>
+                </div>
+              </el-card> 
+            </el-col>  
+          </div>
+          <el-pagination class="margin-top-twenty"
+            layout="prev, pager, next"
+            @current-change="pageChange"
+            :total="allNoteCount">
+          </el-pagination>
+        </div>
+      </el-col>
       <el-col :span="2"><div class="div-flex-column-center margin-left-forty">
         <el-button type="warning" icon="el-icon-edit" style="margin-left: 4px;" v-on:click="addNote"></el-button>
         <el-button type="primary" icon="el-icon-share" class="margin-top-ten" v-on:click="testHeight"></el-button>
@@ -71,14 +80,60 @@
 </template>
 <script>
   export default {
+    created () {
+      this.getTypeList()
+      this.getNoteList(1)
+    },
     data () {
       return {
-        activeNames: ''
+        activeNames: '',
+        pageSize: 20,
+        selectedTypeId: '',
+        allNoteCount: 0,
+        essayList: null,
+        typeList: null
       }
     },
     methods: {
-      typeClick () {
-        this.$message('这是一条消息提示')
+      // 时间戳转事件
+      getDate (date) {
+        var newDate = new Date()
+        newDate.setTime(date)
+        return newDate.toLocaleDateString()
+      },
+      // 获取类型列表
+      getTypeList () {
+        this.$https.get(`/note/typeList`)
+        .then(res => {
+          this.typeList = res.data.result
+        })
+      },
+      // 分页点击事件
+      pageChange (val) {
+        this.getNoteList(val)
+      },
+      // 文章列表
+      getNoteList (pageNo) {
+        this.$https.get(`/note/listNote?pageNo=${pageNo}&pageSize=${this.pageSize}&typeId=${this.selectedTypeId}`)
+        .then(res => {
+          if (res.data.code === 1) {
+            // 成功
+            var r = res.data.result
+            this.allNoteCount = r.totalCount
+            this.essayList = r.list
+            this.setUserOnLine(res.data.result)
+          } else {
+            // 失败
+            this.$message('获取文章列表失败')
+          }
+        })
+      },
+      typeClick (item) {
+        this.selectedTypeId = item.id
+        this.getNoteList(1)
+      },
+      noteClick (item) {
+        this.$router.push({path: '/noteDetail', query: {noteId: item.id}})
       },
       addNote: function () {
         this.$router.push({path: '/addNote'})
@@ -92,14 +147,6 @@
       }
     },
     computed: {
-      typeList () {
-        return [{'name': '我知道'}, {'name': '测试啊测试'}, {'name': '这是一个类型'}, {'name': '测试2'}, {'name': '测试'}, {'name': '测试2'}]
-      },
-      essayList () {
-        var list = [{'name': '测试随笔', 'id': '1', 'content': '假若我是一朵雪花，翩翩的在半空里潇洒，我一定认清我的方向——飞扬，飞扬，飞扬，这地面上有我的方向。', 'mark': '小黄记于周六写代码时'}, {'name': '测试啊测试', 'id': '2', 'content': '内容2'}, {'name': '这是一个类型', 'id': '3', 'content': '内容3'}]
-        this.activeNames = list[0].id
-        return list
-      }
     }
   }
 </script>

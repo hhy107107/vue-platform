@@ -4,7 +4,7 @@
       <el-row class="title-bar flex-between" style="margin-bottom: 0px">
         <el-col :span="19">
           <div class="div-flex">
-            <div class="grid-content bg-purple font-big-module">Home</div>
+            <div class="bg-purple font-big-module">Home</div>
             <div class="font-middle-module">-笔记</div>
             <img src="../assets/image/icon_note.png" class="icon-top">
           </div>
