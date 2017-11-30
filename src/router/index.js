@@ -9,6 +9,9 @@ import noteDetail from '../view/note/noteDetail.vue'
 import testHeight from '../view/note/testHeight.vue'
 import chat from '../view/chat.vue'
 import chatManager from '../view/chatManager.vue'
+import mine from '../view/mine.vue'
+import personal from '../view/mine/personal.vue'
+import account from '../view/mine/account.vue'
 
 Vue.use(Router)
 
@@ -33,6 +36,16 @@ export default new Router({
     {path: '/noteDetail', component: noteDetail},
     {path: '/testHeight', component: testHeight},
     {path: '/chat', component: chat},
-    {path: '/chatManager', component: chatManager}
+    {path: '/chatManager', component: chatManager},
+    {
+      path: '/mine',
+      name: 'mine',
+      component: mine,
+      redirect: '/personal',
+      children: [
+        {path: '/personal', component: personal},
+        {path: '/account', component: account}
+      ]
+    }
   ]
 })

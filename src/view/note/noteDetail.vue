@@ -11,7 +11,7 @@
     </el-row>
     <div class="line-horizontal"></div>
     <div class="main">
-      <el-col :span="18" class="left">
+      <el-col :span="18" class="left-detail">
         <div class="note">
           <div class="note-title">{{note.title}}</div>
           <div class="note-tag-date">
@@ -22,7 +22,7 @@
           <div class="note-content">{{note.content}}</div>
         </div>
       </el-col>
-      <el-col :span="5" class="right">
+      <el-col :span="5" class="right-detail">
         <div>
           <div class="label-triangle-div">
             <div class="label">author</div>
@@ -74,7 +74,7 @@
   }
 </script>
 <style>
-  .right{
+  .right-detail{
   }
   .label{
     background-color: #ae0123;
@@ -143,7 +143,7 @@
     font-size: 1.0em;
     margin-left: 10px;
   }
-  .left{
+  .left-detail{
     background-color: #fff;
     height: 100%;
   }

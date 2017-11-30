@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <el-row>
+  <div class="main-row2">
+    <el-row class="main-row">
       <el-col :span="5"><div>
           <div class="bg">
             <div class="label-triangle-div">
@@ -151,6 +151,17 @@
   }
 </script>
 <style>
+  html,body{
+    height: 100%;
+  }
+  .main-row2{
+    width: 100%;
+    height: 100%;
+  }
+  .main-row{
+    width: 100%;
+    height: 100%;
+  }
   .el-card__body{
     padding: 4px;
     text-align: center;

@@ -1,11 +1,11 @@
 
 @font-face {
   font-family: 'iconfont';  /* project id 467075 */
-  src: url('//at.alicdn.com/t/font_467075_pxtwn7o2f4vd9529.eot');
-  src: url('//at.alicdn.com/t/font_467075_pxtwn7o2f4vd9529.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_467075_pxtwn7o2f4vd9529.woff') format('woff'),
-  url('//at.alicdn.com/t/font_467075_pxtwn7o2f4vd9529.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_467075_pxtwn7o2f4vd9529.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_467075_dj2s9ji57jm50zfr.eot');
+  src: url('//at.alicdn.com/t/font_467075_dj2s9ji57jm50zfr.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_467075_dj2s9ji57jm50zfr.woff') format('woff'),
+  url('//at.alicdn.com/t/font_467075_dj2s9ji57jm50zfr.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_467075_dj2s9ji57jm50zfr.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -47,3 +47,5 @@
 .el-icon-hhy-kefu:before { content: "\e600"; }
 /* 用户 */
 .el-icon-hhy-yonghuuser:before { content: "\e629"; }
+/* 用户2 */
+.el-icon-hhy-yonghu:before { content: "\e63a"; }

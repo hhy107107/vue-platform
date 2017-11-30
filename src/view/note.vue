@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div>
+  <div class="height-100">
+    <div class="height-100">
       <el-row class="title-bar flex-between" style="margin-bottom: 0px">
         <el-col :span="19">
           <div class="div-flex">

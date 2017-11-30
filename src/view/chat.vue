@@ -1,6 +1,6 @@
 <template>
   <div class="m">
-    <el-row :gutter="20" class="title-bar flex-between" style="margin-bottom: 0px">
+    <el-row class="title-bar flex-between" style="margin-bottom: 0px">
       <el-col :span="24">
         <div class="div-flex">
           <div class="bg-purple font-big-module">Home</div>

@@ -168,7 +168,11 @@
       handleIconClick () {},
       showLogin () {
         // test
-        this.loginDialogVisible = true
+        if (this.user === null) {
+          this.loginDialogVisible = true
+        } else {
+          this.$router.push({path: '/mine'})
+        }
       },
       loginUser () {
         this.$https.get(`/user/login?username=${this.inputUsername}&password=${this.inputPassword}`)
