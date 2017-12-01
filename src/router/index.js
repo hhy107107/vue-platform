@@ -26,7 +26,7 @@ export default new Router({
       path: '/note',
       name: 'note',
       component: note,
-      redirect: '/diary',
+      redirect: '/essay',
       children: [
         {path: '/diary', component: noteDiary},
         {path: '/essay', component: noteEssay}

@@ -1,9 +1,9 @@
 <template>
   <div class="m">
-    <el-row :gutter="20" class="title-bar flex-between" style="margin-bottom: 0px">
+    <el-row class="title-bar flex-between" style="margin-bottom: 0px">
       <el-col :span="24">
         <div class="div-flex">
-          <div class="grid-content bg-purple font-big-module">Home</div>
+          <div class="font-big-module pointer" @click="goHome">Home</div>
           <div class="font-middle-module">-客服处理中心</div>
           <i class="iconfont el-icon-hhy-kefu kefu-icon"></i>
           <!-- <img src="../assets/image/icon_note.png" class="icon-top"> -->
@@ -66,6 +66,9 @@ export default {
     }
   },
   methods: {
+    goHome () {
+      this.$router.push('/')
+    },
     selectUser (item) {
       this.toUserName = item.name
       this.toUserId = item.id

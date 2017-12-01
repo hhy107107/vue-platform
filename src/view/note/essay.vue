@@ -8,10 +8,10 @@
               <img src="../../assets/image/triangle_right.png" class="label-triangle">
             </div>
             <div class="white margin-left-ten div-flex-column-center user-content">
-              <img src="../../assets/image/temp_pictures.jpg" class="pictures">
-              <div class="user-name">小黄</div>
-              <el-tag type="warning" class="margin-top-ten">写作达人</el-tag>
-              <div class="user-info margin-twenty">两君子无争，相让故也。一君子一小人无争，有容故也。争者两小人也，有识者奈何自处于小人。</div>
+              <img :src="userface" class="pictures">
+              <div class="user-name">{{user.name}}</div>
+              <el-tag type="warning" class="margin-top-ten">{{user.noteGradeName}}</el-tag>
+              <div class="user-info margin-twenty">{{user.signature}}</div>
             </div>
           </div>
           <div class="block-border margin-top-twenty">
@@ -44,9 +44,9 @@
             </el-row>
         </div>
       </div></el-col>
-      <el-col :span="17">
-        <div class="div-flex-column-right">
-          <div class="grid-content margin-left-forty width-100">
+      <el-col :span="17" class="">
+        <div class="div-flex-column-right2">
+          <div class="grid-content margin-left-twenty width-100">
             <el-col :key=item.name v-for="(item, index) in essayList" :value="item.name">
               <el-card @click.native="noteClick(item)" class="content-card">
                 <div class="essay-title">
@@ -64,7 +64,7 @@
               </el-card> 
             </el-col>  
           </div>
-          <el-pagination class="margin-top-twenty"
+          <el-pagination class="margin-top-twenty pagination"
             layout="prev, pager, next"
             @current-change="pageChange"
             :total="allNoteCount">
@@ -83,9 +83,12 @@
     created () {
       this.getTypeList()
       this.getNoteList(1)
+      this.initData()
     },
     data () {
       return {
+        userface: '',
+        user: null,
         activeNames: '',
         pageSize: 20,
         selectedTypeId: '',
@@ -95,6 +98,16 @@
       }
     },
     methods: {
+      initData () {
+        this.$https.get(`/initData?needNoteGrade=true`)
+        .then(res => {
+          if (res.data.code === 1) {
+            // 成功
+            this.user = res.data.result
+            this.userface = 'http://127.0.0.1/static/' + this.user.userface
+          }
+        })
+      },
       // 时间戳转事件
       getDate (date) {
         var newDate = new Date()
@@ -262,5 +275,8 @@
   .essay-mark{
     text-align: right;
   }
- 
+  .pagination{
+    text-align: right;
+    margin-right: -20px;    
+  }
 </style>

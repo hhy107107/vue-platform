@@ -4,7 +4,7 @@
 			<el-row class="title-bar flex-between" style="margin-bottom: 0px">
 				<el-col :span="19">
           <div class="div-flex">
-            <div class="grid-content bg-purple font-big-module">Home</div>
+            <div class="font-big-module pointer" @click="goHome">Home</div>
             <div class="font-middle-module">-笔记</div>
             <img src="../../assets/image/icon_note.png" class="icon-top">
           </div>
@@ -221,6 +221,9 @@
       }
     },
     methods: {
+      goHome () {
+        this.$router.push('/')
+      },
       // 类型标签被选中
       tagSelect (tag) {
         this.tagClickId = tag.id
@@ -230,7 +233,8 @@
         this.$https.post(`/note/addNote`, querystring.stringify({
           typeId: this.tagClickId,
           title: this.inputTitle,
-          content: this.input
+          content: this.input,
+          isMarkdown: true
         }))
         .then(res => {
           if (res.data.code === 1) {

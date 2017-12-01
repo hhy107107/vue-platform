@@ -74,7 +74,8 @@
             reason.push(this.getReason(u.reason))
             this.ruleForm.reason = reason
             this.ruleForm.sex = this.getSex(u.sex)
-            this.ruleForm.signature = this.user.signature
+            this.ruleForm.signature = u.signature
+            this.imageUrl = this.fileBaseUrl + u.userface
           } else {
             // 失败
           }
@@ -82,6 +83,7 @@
       },
       data () {
         return {
+          fileBaseUrl: 'http://127.0.0.1/static/',
           imageUrl: '',
           fileUrl: '',
           user: '',
@@ -139,7 +141,6 @@
         handleAvatarSuccess (res, file) {
           this.imageUrl = URL.createObjectURL(file.raw)
           this.fileUrl = res.result.filePath
-          this.$alert('filePath -- ' + this.fileUrl)
         },
         getSex (type) {
           if (type === '我是小黄') {

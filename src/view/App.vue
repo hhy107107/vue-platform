@@ -1,39 +1,25 @@
 <template>
+  <div>
   <div class="header-hhy">
-  <el-row>
-    <el-col :span="12"><div class="grid-content bg-purple font-big">
-      Home
-      <i class="iconfont el-icon-hhy-toux2 userface" :class="{'userLogin': isLogin}" @click="showLogin"></i> 
-    </div></el-col>
-    <el-col :span="4"><div class="grid-content bg-purple-light">
-      <el-input
-        placeholder="搜点什么好呢"
-        icon="search"
-        v-model="input2"
-        :on-icon-click="handleIconClick">
-      </el-input>
-      </div></el-col>
-    <el-col :span="8">
-      <div class="grid-content bg-purple">
-        <el-col :span="5">
-          <div class="grid-content bg-purple">
-            <el-dropdown>
-            <span class="el-dropdown-link">
-              Learn<i class="el-icon-caret-bottom el-icon--right"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>JAVA</el-dropdown-item>
-              <el-dropdown-item>Android</el-dropdown-item>
-              <el-dropdown-item>Vue</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>  
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="grid-content bg-purple">
+    <div class="header-content">
+      <div class="header-left font-big">
+        <span>Home</span>
+        <i class="iconfont el-icon-hhy-toux2 userface margin-left-ten" :class="{'userLogin': isLogin}" @click="showLogin"></i> 
+      </div>
+      <div class="header-center">
+        <div class="">
+          <el-input id="search"
+            placeholder="搜点什么好呢"
+            icon="search"
+            v-model="input2"
+            :on-icon-click="handleIconClick">
+          </el-input>
+        </div>
+        <div class="header-right">
+          <div class="dropdown">
             <el-dropdown>
               <span class="el-dropdown-link">
-                About US<i class="el-icon-caret-bottom el-icon--right"></i>
+                关于我们<i class="el-icon-caret-bottom el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>BJHJ</el-dropdown-item>
@@ -42,12 +28,10 @@
               </el-dropdown-menu>
             </el-dropdown>
           </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="grid-content bg-purple">
+          <div class="dropdown">
             <el-dropdown>
               <span class="el-dropdown-link">
-                Support<i class="el-icon-caret-bottom el-icon--right"></i>
+                支持<i class="el-icon-caret-bottom el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>支付宝</el-dropdown-item>
@@ -55,12 +39,10 @@
               </el-dropdown-menu>
             </el-dropdown>
           </div>
-        </el-col>
-        <el-col :span="7">
-          <div class="grid-content bg-purple">
-             <el-dropdown>
+          <div class="dropdown">
+            <el-dropdown>
               <span class="el-dropdown-link">
-                Translations<i class="el-icon-caret-bottom el-icon--right"></i>
+                翻译<i class="el-icon-caret-bottom el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>中文</el-dropdown-item>
@@ -68,41 +50,32 @@
               </el-dropdown-menu>
             </el-dropdown>
           </div>
-        </el-col>
-      </div>
-    </el-col>
-  </el-row>
-  <el-row class="center">
-    <el-col :span="6"><div class="grid-content bg-purple-dark"></div></el-col>
-    <el-col :span="12"><div class="grid-content bg-purple-dark">
-      <el-col :span="8"><div class="grid-content bg-purple-dark">
-        <img src="https://vuejs.org/images/logo.png" class="logo-big">
-      </div></el-col>
-      <el-col :span="16"><div class="grid-content bg-purple-dark">
-        <el-row><el-col :span="24"><div class="grid-content bg-purple-dark"><h1>Welcome to SmallYellow's Home</h1></div></el-col></el-row>
-        <el-row><el-col :span="24"><div class="grid-content bg-purple-dark">
-          <el-button type="primary">GET STARTED</el-button><el-button>GITHUB</el-button>
-        </div></el-col></el-row>
-        
-      </div></el-col>
-    </div></el-col>
-    <el-col :span="6"><div class="grid-content bg-purple-dark"></div></el-col>
-  </el-row>
-  <el-row style="text-align:center; margin:80px" class="content">
-    <el-col :span="4" v-for="(item, index) in appList" :key="index">
-      <el-card :body-style="{ padding: '0px' }">
-        <img src="https://vuejs.org/images/logo.png" class="center-image">
-        <div style="padding: 14px;">
-          <span>{{item.name}}</span>
-          <div class="bottom clearfix">
-            <time class="time">{{ currentDate }}</time>
-            <router-link :to=item.link>点开它</router-link>
-            <!--<el-button type="text" class="button" @click="$route.push('/article')">奇妙之旅</el-button>-->
-          </div>
         </div>
-      </el-card>
-    </el-col>
-  </el-row>
+      </div>
+    </div>
+    <div class="line-horizontal"></div>
+  </div>
+  <div class="center">
+    <el-carousel height="280px">
+      <el-carousel-item v-for="(item, index) in bannerList" :key=item>
+        <img :src=item.url class="banner-img">
+      </el-carousel-item>
+    </el-carousel>
+  </div>
+  <div class="content-title">
+    <div class="line"></div>
+    <span class="model-label">全部模块</span>
+    <div class="line"></div>
+  </div>
+  <div class="content">
+    <div v-for="(item, index) in appList" :key="index">
+      <div @click="openApp(item.link)" class="model-card" :id=item.id>
+        <img :src=item.icon class="center-image" @click="openApp(item.link)">
+        <span @click="openApp(item.link)" class="model-name">{{item.name}}</span>
+        <!-- <router-link :to=item.link>点开它</router-link> -->
+      </div>
+    </div>
+  </div>
   <!--<router-view></router-view>-->
   <el-dialog
     title=""
@@ -130,6 +103,7 @@
       <el-button type="primary" @click="loginUser">登 录</el-button>
     </span>
   </el-dialog>
+
   </div>
 </template>
 
@@ -158,10 +132,14 @@
         inputUsername: '',
         inputPassword: '',
         user: null,
-        isLogin: false
+        isLogin: false,
+        bannerList: [{url: 'http://127.0.0.1/static/banner/banner1.jpg'}, {url: 'http://127.0.0.1/static/banner/banner2.jpg'}, {url: 'http://127.0.0.1/static/banner/banner3.jpg'}]
       }
     },
     methods: {
+      openApp (link) {
+        this.$router.push(link)
+      },
       handleSelect (key, keyPath) {
         console.log(key, keyPath)
       },
@@ -194,13 +172,76 @@
     },
     computed: {
       appList () {
-        return [{'name': '笔记本', 'link': '/diary'}, {'name': '客服中心', 'link': '/chat'}, {'name': '客服后台', 'link': '/chatManager'}]
+        return [{'id': 'm1', 'name': '笔记本', 'link': '/note', 'icon': 'http://127.0.0.1/static/icon/model-note.png'}, {'id': 'm2', 'name': '客服中心', 'link': '/chat', 'icon': 'http://127.0.0.1/static/icon/model-message.png'}, {'id': 'm3', 'name': '客服后台', 'link': '/chatManager', 'icon': 'http://127.0.0.1/static/icon/model-service.png'}]
       }
     }
   }
 </script>
 
 <style lang="scss">
+  .center-image{
+    width: 80px;
+    height: 80px;
+  }
+  .content{
+    margin: 20px 80px;
+  }
+  .model-name{
+    color: #fff;
+    margin-top: 10px;
+    font-size: 1.1em;
+  }
+  #m1.model-card{
+    background-color: rgba(246, 76, 20, 0.801);
+  }
+  #m2.model-card{
+    background-color: rgba(0, 165, 241, 0.801);
+  }
+  #m3.model-card{
+    background-color: rgba(255, 187, 0, 0.801);
+  }
+  .model-card{
+    border-radius: 100%;
+    height: 180px;
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .content-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+  }
+  .line{
+    height: 1px;
+    width: 40%;
+    background-color: #f1f1f1;
+  }
+  .model-label{
+    font-size: 1.1em;
+    margin: 20px;
+    color: #b1b1b1;
+    padding-top: 10px;
+  }
+  .banner-img{
+    width: 100%;  
+    max-height: 100%;   
+  }
+  .el-dropdown-link{
+    cursor: pointer;
+  }
+  .el-dropdown-link:hover{
+    color: #ff9423;
+  }
+  #search.el-input__inner {
+    border-radius: 50px;
+    height: 30px;
+  }
   #app {
     font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -223,14 +264,37 @@
     min-height: 36px;
   }
   .header-hhy{
-    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+  }
+  .header-left{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .header-content{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+  }
+  .header-center{
+    display: flex;
+    margin-right: 10px;
+    align-items: center;
+    align-content: center;
+  }
+  .header-right{
+    display: flex;
+    margin-left: 40px;
+    margin-right: 20px;
   }
   .center{
-    margin-top: 60px;
-  }
-  .center-image{
-    width: 100px;
-    height: 100px;
+    background-color: #d3dce6;
   }
   .logo-big{
     width: 215px;
@@ -244,12 +308,22 @@
   .userLogin{
     color: #ff9423;
   }
-  .el-dialog__body {
-    padding: 0px 20px;
-    color: #5a5e66;
-    line-height: 24px;
-    font-size: 14px;
+  .dropdown{
+    padding: 0px 10px;
   }
-
-  
+  /* 轮播图开始 */
+  .el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 150px;
+    margin: 0;
+  }
+  .el-carousel__item:nth-child(2n) {
+     background-color: #99a9bf;
+  }
+  .el-carousel__item:nth-child(2n+1) {
+     background-color: #d3dce6;
+  }
+  /* 轮播图结束 */
 </style>

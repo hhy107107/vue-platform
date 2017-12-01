@@ -4,7 +4,7 @@
       <el-row class="title-bar flex-between" style="margin-bottom: 0px">
         <el-col :span="19">
           <div class="div-flex">
-            <div class="bg-purple font-big-module">Home</div>
+            <div class="font-big-module pointer" @click="goHome">Home</div>
             <div class="font-middle-module">-笔记</div>
             <img src="../assets/image/icon_note.png" class="icon-top">
           </div>
@@ -18,7 +18,7 @@
       </el-row>
       <div class="line-horizontal"></div>
     </div>
-    <main class="main bg">
+    <main class="main bg height-100 note">
       <router-view></router-view>
     </main>
   </div>
@@ -30,17 +30,21 @@
     data () {
       return {
         msg: '测试页面',
-        activeIndex: 'diary'
+        activeIndex: 'essay'
       }
     },
     methods: {
+      goHome () {
+        this.$router.push('/')
+      },
       tabClick () {
         this.$router.push({path: this.activeIndex})
       }
     },
     computed: {
       noteOptions () {
-        return [{'name': '日记', 'route': 'diary'}, {'name': '随笔', 'route': 'essay'}]
+        return [{'name': '笔记', 'route': 'essay'}]
+        // return [{'name': '笔记', 'route': 'essay'}, {'name': '日记', 'route': 'diary'}]
       }
     },
     components: { calendar }
@@ -56,6 +60,8 @@
     font-size:1.5em;
     margin-left:30px;
   }
-
- 
+  .note{
+    min-height: 670px;
+  }
+  
 </style>

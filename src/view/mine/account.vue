@@ -1,12 +1,17 @@
 <template>
-    <div class="m2">
-      <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
-          <el-form-item label="账号">
-            test3
-          </el-form-item>
-          <el-form-item label="邮箱">
-            hhy107107@qq.com
-          </el-form-item>
+    <div class="m4">
+      <div class="font">
+        <div>
+          <i class="iconfont el-icon-hhy-zhanghao icon"></i>
+          <span class="text">账号：</span><span class="text">{{username}}</span>
+        </div>
+        <div class="margin-left-twenty">
+          <i class="iconfont el-icon-hhy-youxiang icon"></i>
+          <span class="text">邮箱：</span><span class="text">{{email}}</span>
+        </div>
+      </div>
+      <div class="line-horizontal"></div>
+      <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="bg demo-ruleForm padding-top-twenty">
           <el-form-item label="密码" prop="pass">
             <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
           </el-form-item>
@@ -22,7 +27,21 @@
   </template>
   
   <script>
+    import querystring from 'querystring'
     export default {
+      created () {
+        this.$https.get(`/initData`)
+        .then(res => {
+          if (res.data.code === 1) {
+            // 成功
+            var u = res.data.result
+            this.username = u.username
+            this.email = u.email
+          } else {
+            // 失败
+          }
+        })
+      },
       data () {
         var validatePass = (rule, value, callback) => {
           if (value === '') {
@@ -44,6 +63,8 @@
           }
         }
         return {
+          username: '',
+          email: '',
           ruleForm2: {
             pass: '',
             checkPass: ''
@@ -71,14 +92,47 @@
         },
         resetForm (formName) {
           this.$refs[formName].resetFields()
+        },
+        changePwd () {
+          this.$https.post(`/user/changeUserPwd`, querystring.stringify({
+            newPwd: this.ruleForm2.pass,
+            oldPwd: this.ruleForm2.checkPass
+          }))
+          .then(res => {
+            if (res.data.code === 1) {
+              this.$message('修改密码成功')
+            } else {
+              this.$message(res.data.message)
+            }
+          })
         }
       }
     }
   </script>
   
-  <style lang="scss">
-   .el-form-item{
-     max-width: 600px;
-   }
-  </style>
+<style lang="scss">
+  .el-form-item{
+    max-width: 600px;
+  }
+  .m4{
+    display: flex;
+    flex-direction: column;
+  }
+  .icon{
+    width: 20px;
+    height: 40px;
+    color: #0f8fe4;
+    font-size: 1.0em;
+    text-align: center;
+  }
+  .font{
+    color: #0f8fe4;
+    font-size: 1.0em;
+    padding: 20px 20px 0px 20px;
+    display: flex;
+  }
+  .text{
+    text-align: center;
+  }
+</style>
         

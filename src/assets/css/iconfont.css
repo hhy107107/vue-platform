@@ -1,11 +1,11 @@
 
 @font-face {
   font-family: 'iconfont';  /* project id 467075 */
-  src: url('//at.alicdn.com/t/font_467075_dj2s9ji57jm50zfr.eot');
-  src: url('//at.alicdn.com/t/font_467075_dj2s9ji57jm50zfr.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_467075_dj2s9ji57jm50zfr.woff') format('woff'),
-  url('//at.alicdn.com/t/font_467075_dj2s9ji57jm50zfr.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_467075_dj2s9ji57jm50zfr.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_467075_5zn84swebz9f6r.eot');
+  src: url('//at.alicdn.com/t/font_467075_5zn84swebz9f6r.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_467075_5zn84swebz9f6r.woff') format('woff'),
+  url('//at.alicdn.com/t/font_467075_5zn84swebz9f6r.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_467075_5zn84swebz9f6r.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -49,3 +49,13 @@
 .el-icon-hhy-yonghuuser:before { content: "\e629"; }
 /* 用户2 */
 .el-icon-hhy-yonghu:before { content: "\e63a"; }
+/* 用户3 */
+.el-icon-hhy-zhanghao:before { content: "\e673"; }
+/* 邮箱 */
+.el-icon-hhy-youxiang:before { content: "\e632"; }
+/* 消息 */
+.el-icon-hhy-xiaoxi:before { content: "\e61b"; }
+/* 客服 */
+.el-icon-hhy-kefu1:before { content: "\e610"; }
+/* 笔记 */
+.el-icon-hhy-bijiben:before { content: "\e606"; }
