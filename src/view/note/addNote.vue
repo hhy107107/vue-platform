@@ -33,18 +33,18 @@
       </div>
       <!-- 插入图片弹窗 -->
       <el-dialog title="插入图片" :visible.sync="dialogInertImgVisible">
-        <el-tabs type="border-card">
-          <el-tab-pane label="在线图片">
+        <el-tabs type="border-card" v-model="imageDialogTabs">
+          <el-tab-pane label="在线图片" name="1">
             <div>
               <div class="onlinePicTxt">请输入图片完整地址。</div>
               <el-input class="el-input2"
               placeholder="http://example.com/image.jpg"
               prefix-icon="iconfont el-icon-hhy-weibiaoti102-copy"
-              v-model="inputImgAddress">
+              v-model="inputImgOnLineAddress">
               </el-input>
             </div>
           </el-tab-pane>
-          <el-tab-pane label="上传图片">
+          <el-tab-pane label="上传图片" name="2">
             <div>
               <div class="flex-between upload-img">
                 <el-upload
@@ -67,7 +67,7 @@
               </div>
             </div>
           </el-tab-pane>
-          <el-tab-pane label="断点续传">
+          <el-tab-pane label="断点续传" name="3">
             <div>
               <div class="flex-between upload-img">
                 <el-upload
@@ -122,16 +122,16 @@
       </el-dialog>
       <!-- markdown语法帮助 -->
       <el-dialog title="Markdown语法帮助" :visible.sync="dialogHelpVisible"
-      :modal=false
-      :lock-scroll=false
-      :close-on-click-modal=false
-      :close-on-press-escape=false
-      :append-to-body=true
-      class="test1"
-      id="helpDialog">
+        :modal=false
+        :lock-scroll=false
+        :close-on-click-modal=false
+        :close-on-press-escape=false
+        :append-to-body=true
+        class="test1"
+        id="helpDialog">
       </el-dialog>
       <el-dialog title="发表文章" :visible.sync="dialogNoteTypeVisible"
-      id="noteTypeDialog">
+        id="noteTypeDialog">
         <div>
           <div class="text-hint">给精心撰写的文章设置一个分类</div>
           <div class="tag-content">
@@ -203,7 +203,9 @@
         tagInputVisible: false,
         tagInputValue: '',
         tags: null,
-        tagClickId: 0
+        tagClickId: 0,
+        imageDialogTabs: '1',
+        inputImgOnLineAddress: ''
       }
     },
     computed: {
@@ -234,7 +236,7 @@
           typeId: this.tagClickId,
           title: this.inputTitle,
           content: this.input,
-          isMarkdown: true
+          isMarkdown: 1
         }))
         .then(res => {
           if (res.data.code === 1) {
@@ -382,6 +384,9 @@
       },
       addImg (fileUrl) {
         // this.input = this.input + '\n ![图片描述](' + this.fileUrl + ')\n'
+        if (this.imageDialogTabs === '1') {
+          this.fileUrl = this.inputImgOnLineAddress
+        }
         this.dialogInertImgVisible = false
         var length = this.doGetCaretPosition
         var inputStart = this.input.substring(0, length)

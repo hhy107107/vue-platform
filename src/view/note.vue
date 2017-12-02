@@ -63,5 +63,11 @@
   .note{
     min-height: 670px;
   }
-  
+  .main{
+    height: 100%;
+    padding: 20px 40px 20px 40px !important;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(247, 247, 247);
+  }
 </style>
