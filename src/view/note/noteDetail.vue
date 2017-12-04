@@ -11,7 +11,7 @@
     </el-row>
     <div class="line-horizontal"></div>
     <div class="main2">
-      <el-col :span="18" class="left-detail">
+      <div class="left-detail">
         <div class="note">
           <div class="note-title">{{note.title}}</div>
           <div class="note-tag-date">
@@ -20,28 +20,28 @@
               <div class="note-date">{{getDate(note.createTime)}}</div>
             </div>
             <div class="note-title-right">
-              <i class="iconfont el-icon-hhy-yuedu"></i>{{note.readNum}}
-              <span class="note-zan" @click="changeNoteZan" :class="{'note-zaned': isZan === 1}"><i class="iconfont el-icon-hhy-zan margin-left-ten"></i>{{note.zanNum}}</span>
+              <i class="iconfont el-icon-hhy-yuedu margin-right-four"></i>{{note.readNum}}
+              <span class="note-zan" @click="changeNoteZan" :class="{'note-zaned': isZan === 1}"><i class="iconfont el-icon-hhy-zan margin-left-ten margin-right-two"></i>{{totalZanNum}}</span>
             </div>
           </div>
           <div class="line-horizontal"></div>
           <div v-html="compiledMarkdown" class="note-content"></div>
         </div>
-      </el-col>
-      <el-col :span="5" class="right-detail">
+      </div>
+      <div class="right-detail">
         <div>
           <div class="label-triangle-div">
             <div class="label">author</div>
             <img src="../../assets/image/triangle_right.png" class="label-triangle">
           </div>
           <div class="white margin-left-ten div-flex-column-center user-content">
-            <img src="../../assets/image/temp_pictures.jpg" class="pictures">
-            <div class="user-name">小黄</div>
-            <el-tag type="warning" class="margin-top-ten">写作达人</el-tag>
-            <div class="user-info margin-twenty">两君子无争，相让故也。一君子一小人无争，有容故也。争者两小人也，有识者奈何自处于小人。</div>
+            <img :src="userface" class="pictures">
+            <div class="user-name">{{user.name}}</div>
+            <el-tag type="warning" class="margin-top-ten">{{user.noteGradeName}}</el-tag>
+            <div class="user-info margin-twenty">{{user.signature}}</div>
           </div>
         </div>
-      </el-col>
+      </div>
     </div>
   </div>
 </template>
@@ -52,18 +52,22 @@
   export default {
     data () {
       return {
+        user: null,
         noteId: this.$route.query.noteId,
         note: null,
-        isZan: 2
+        isZan: 2,
+        totalZanNum: 0,
+        userface: ''
       }
     },
     created () {
       this.getNoteDetail()
       this.getNoteZan()
+      this.initData()
     },
     computed: {
       compiledMarkdown: function () {
-        if (this.note.isMarkDown === 1) {
+        if (this.note.editType === 1) {
           return marked(this.note.content, { sanitize: true })
         } else {
           return this.note.content
@@ -71,6 +75,16 @@
       }
     },
     methods: {
+      initData () {
+        this.$https.get(`/initData?needNoteGrade=true`)
+        .then(res => {
+          if (res.data.code === 1) {
+            // 成功
+            this.user = res.data.result
+            this.userface = 'http://127.0.0.1/static/' + this.user.userface
+          }
+        })
+      },
       // 时间戳转事件
       getDate (date) {
         return dateFormat(date, 'yyyy-MM-dd')
@@ -93,6 +107,7 @@
         .then(res => {
           if (res.data.code === 1) {
             // 成功
+            this.totalZanNum = res.data.result.totalZanNum
             if (res.data.result.zan !== null) {
               this.isZan = res.data.result.zan
             }
@@ -175,8 +190,8 @@
     color: #000;
   }
   .main2{
-    height: 100%;
-    padding: 20px 40px 20px 40px !important;
+    height: calc(100% - 90px);
+    padding: 20px 40px 16px 40px !important;
     display: flex;
     justify-content: space-between;
     background-color: rgb(247, 247, 247);
@@ -209,6 +224,10 @@
   .left-detail{
     background-color: #fff;
     height: 100%;
+    width: 80%;
+  }
+  .right-detail{
+    width: 18%;
   }
   .title-bar{
     padding-top: 10px;

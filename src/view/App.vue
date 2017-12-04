@@ -51,6 +51,7 @@
             </el-dropdown>
           </div>
         </div>
+        <i class="iconfont el-icon-hhy-nav-my-login-out logout" @click="logoutUser"></i>
       </div>
     </div>
     <div class="line-horizontal"></div>
@@ -96,11 +97,29 @@
           </el-input>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="快速注册" name="second">注册</el-tab-pane>
+      <el-tab-pane label="快速注册" name="second">
+        <div>
+          <el-input
+            placeholder="用户名"
+            prefix-icon="iconfont el-icon-hhy-touxiang1"
+            v-model="inputRegisterUsername">
+          </el-input>
+          <el-input class="margin-top-twenty"
+            placeholder="邮箱"
+            prefix-icon="iconfont el-icon-hhy-touxiang1"
+            v-model="inputRegisterEmail">
+          </el-input>
+          <el-input class="margin-top-twenty"
+            placeholder="6~18位字母和数字组合"
+            prefix-icon="iconfont el-icon-hhy-mima"
+            v-model="inputRegisterPassword">
+          </el-input>
+        </div>
+      </el-tab-pane>
     </el-tabs>
     <span slot="footer" class="dialog-footer">
       <el-button @click="dialogVisible = false">取 消</el-button>
-      <el-button type="primary" @click="loginUser">登 录</el-button>
+      <el-button type="primary" @click="loginUser">确 定</el-button>
     </span>
   </el-dialog>
 
@@ -108,6 +127,7 @@
 </template>
 
 <script>
+  import querystring from 'querystring'
   export default {
     created () {
       this.$https.get(`/initData`)
@@ -131,6 +151,9 @@
         activeName: 'first',
         inputUsername: '',
         inputPassword: '',
+        inputRegisterUsername: '',
+        inputRegisterPassword: '',
+        inputRegisterEmail: '',
         user: null,
         isLogin: false,
         bannerList: [{url: 'http://127.0.0.1/static/banner/banner1.jpg'}, {url: 'http://127.0.0.1/static/banner/banner2.jpg'}, {url: 'http://127.0.0.1/static/banner/banner3.jpg'}]
@@ -153,21 +176,51 @@
         }
       },
       loginUser () {
-        this.$https.get(`/user/login?username=${this.inputUsername}&password=${this.inputPassword}`)
-        .then(res => {
-          if (res.data.code === 1) {
-            // 成功
-            this.setUserOnLine(res.data.result)
-          } else {
-            // 失败
-            this.$alert('失败')
-          }
-        })
+        if (this.activeName === 'first') {
+          // 登录
+          this.$https.get(`/common/login?username=${this.inputUsername}&password=${this.inputPassword}`)
+          .then(res => {
+            if (res.data.code === 1) {
+              // 成功
+              this.setUserOnLine(res.data.result)
+            } else {
+              // 失败
+              this.$alert('失败')
+            }
+          })
+        } else {
+          // 注册
+          this.$https.post(`/common/register`, querystring.stringify({
+            username: this.inputRegisterUsername,
+            password: this.inputRegisterUsername,
+            email: this.inputRegisterEmail
+          }))
+          .then(res => {
+            if (res.data.code === 1) {
+              this.$message('用户注册成功，请登录邮箱进行验证')
+            } else {
+              this.$message(res.data.message)
+            }
+          })
+        }
       },
       setUserOnLine (user) {
         this.loginDialogVisible = false
         this.user = user
         this.isLogin = true
+      },
+      logoutUser () {
+        // 退出
+        this.$https.get(`/common/logout`)
+        .then(res => {
+          if (res.data.code === 1) {
+            // 成功
+            this.loginDialogVisible = true
+          } else {
+            // 失败
+            this.$alert('服务器错误')
+          }
+        })
       }
     },
     computed: {
@@ -179,6 +232,12 @@
 </script>
 
 <style lang="scss">
+  .logout{
+    margin-right: 10px;
+    color: #888888;
+    font-size: 1.4em;
+    cursor: pointer;
+  }
   .center-image{
     width: 80px;
     height: 80px;
