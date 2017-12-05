@@ -5,7 +5,9 @@
       <div class="header-left font-big">
         <span>Home</span>
         <i class="iconfont el-icon-hhy-toux2 userface margin-left-ten" :class="{'userLogin': isLogin}" @click="showLogin"></i> 
+        <span class="font-small margin-left-ten pointer" @click="goToNew">新首页</span>
       </div>
+      
       <div class="header-center">
         <div class="">
           <el-input id="search"
@@ -160,6 +162,9 @@
       }
     },
     methods: {
+      goToNew () {
+        this.$router.push('/home')
+      },
       openApp (link) {
         this.$router.push(link)
       },
@@ -185,7 +190,7 @@
               this.setUserOnLine(res.data.result)
             } else {
               // 失败
-              this.$alert('失败')
+              this.$message(res.data.message)
             }
           })
         } else {

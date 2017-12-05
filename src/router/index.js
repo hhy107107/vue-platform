@@ -12,6 +12,8 @@ import chatManager from '../view/chatManager.vue'
 import mine from '../view/mine.vue'
 import personal from '../view/mine/personal.vue'
 import account from '../view/mine/account.vue'
+import home from '../view/home.vue'
+import login from '../view/login.vue'
 
 Vue.use(Router)
 
@@ -46,6 +48,8 @@ export default new Router({
         {path: '/personal', component: personal},
         {path: '/account', component: account}
       ]
-    }
+    },
+    {path: '/home', component: home},
+    {path: '/login', component: login}
   ]
 })

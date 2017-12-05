@@ -12,10 +12,13 @@
       </div>
       <div class="line-horizontal"></div>
       <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="bg demo-ruleForm padding-top-twenty">
-          <el-form-item label="密码" prop="pass">
+        <el-form-item label="输入旧密码" prop="oldPass">
+          <el-input type="password" v-model="ruleForm2.oldPass" auto-complete="off"></el-input>
+        </el-form-item>  
+        <el-form-item label="输入新密码" prop="pass">
             <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
           </el-form-item>
-          <el-form-item label="确认密码" prop="checkPass">
+          <el-form-item label="输入新密码" prop="checkPass">
             <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
           </el-form-item>
           <el-form-item>
@@ -83,7 +86,7 @@
         submitForm (formName) {
           this.$refs[formName].validate((valid) => {
             if (valid) {
-              alert('submit!')
+              this.changePwd()
             } else {
               console.log('error submit!!')
               return false
@@ -96,7 +99,7 @@
         changePwd () {
           this.$https.post(`/user/changeUserPwd`, querystring.stringify({
             newPwd: this.ruleForm2.pass,
-            oldPwd: this.ruleForm2.checkPass
+            oldPwd: this.ruleForm2.oldPass
           }))
           .then(res => {
             if (res.data.code === 1) {

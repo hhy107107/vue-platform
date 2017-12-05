@@ -11,7 +11,7 @@
       </el-col>
     </el-row>
     <div class="line-horizontal"></div>
-    <div class="main">
+    <div class="main2">
       <el-input
         type="textarea"
         :rows="10"
@@ -106,6 +106,10 @@
 </script>
 
 <style lang="scss">
+  .main2{
+    height: 100%;
+    padding: 20px 60px 20px 60px;
+  }
   html,body{
     height: 100%;
   }

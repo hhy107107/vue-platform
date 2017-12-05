@@ -178,6 +178,7 @@
               // 提交修改
               this.changeUser()
             } else {
+              this.$message('error submit!!')
               console.log('error submit!!')
               return false
             }

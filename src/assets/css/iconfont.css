@@ -1,11 +1,11 @@
 
 @font-face {
   font-family: 'iconfont';  /* project id 467075 */
-  src: url('//at.alicdn.com/t/font_467075_ghvmt6dacr82gldi.eot');
-  src: url('//at.alicdn.com/t/font_467075_ghvmt6dacr82gldi.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_467075_ghvmt6dacr82gldi.woff') format('woff'),
-  url('//at.alicdn.com/t/font_467075_ghvmt6dacr82gldi.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_467075_ghvmt6dacr82gldi.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_467075_t07exub116r5p14i.eot');
+  src: url('//at.alicdn.com/t/font_467075_t07exub116r5p14i.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_467075_t07exub116r5p14i.woff') format('woff'),
+  url('//at.alicdn.com/t/font_467075_t07exub116r5p14i.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_467075_t07exub116r5p14i.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -65,3 +65,13 @@
 .el-icon-hhy-yuedu:before { content: "\e731"; }
 /* 退出登录 */
 .el-icon-hhy-nav-my-login-out:before { content: "\e601"; }
+/* 云 */
+.el-icon-hhy-yun:before { content: "\e617"; }
+/* 搜索 */
+.el-icon-hhy-sousuo:before { content: "\e616"; }
+/* 其他 */
+.el-icon-hhy-qita:before { content: "\e602"; }
+/* 微信 */
+.el-icon-hhy-weixin:before { content: "\e717"; }
+/* QQ */
+.el-icon-hhy-qq:before { content: "\e603"; }

@@ -11,8 +11,8 @@
       </el-col>
     </el-row>
     <div class="line-horizontal"></div>
-    <div class="main2">
-      <el-row class="height-100">
+    <div class="mai3">
+      <div class="height-100">
         <el-col :span="4" class="left height-100">
           <div class="online">当前在线：3</div>
           <div v-for="(item, index) in userList" class="user-item" @click="selectUser(item)">
@@ -33,7 +33,7 @@
           <!-- <el-button type="primary" size="small" @click="connectChat" class="margin-top-twenty">连接</el-button> -->
           <el-button type="primary" size="small" @click="send" class="margin-top-twenty">发送</el-button>
         </el-col>
-      </el-row>
+      </div>
     </div>
   </div>
 </template>
@@ -173,7 +173,7 @@ export default {
     padding-bottom: 10px;
     color: rgb(177, 177, 177)
   }
-  .main2{
+  .main3{
     height: 100%;
   }
   .user-item{

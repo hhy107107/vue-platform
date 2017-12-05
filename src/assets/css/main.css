@@ -32,6 +32,9 @@ margin-top: 4px;
 font-size:1.5em;
 margin-left:30px
 }
+.font-small{
+    font-size: 14px;
+}
 .div-flex{
     display: flex;
     align-content: center;
@@ -110,6 +113,9 @@ margin-left:30px
 }
 .white{
     background-color: #fff;
+}
+.color-white{
+    color: #fff;
 }
 .margin-left-ten{
     margin-left: 10px; 
