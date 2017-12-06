@@ -1,11 +1,11 @@
 
 @font-face {
   font-family: 'iconfont';  /* project id 467075 */
-  src: url('//at.alicdn.com/t/font_467075_t07exub116r5p14i.eot');
-  src: url('//at.alicdn.com/t/font_467075_t07exub116r5p14i.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_467075_t07exub116r5p14i.woff') format('woff'),
-  url('//at.alicdn.com/t/font_467075_t07exub116r5p14i.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_467075_t07exub116r5p14i.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_467075_zty6uz5hjsrio1or.eot');
+  src: url('//at.alicdn.com/t/font_467075_zty6uz5hjsrio1or.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_467075_zty6uz5hjsrio1or.woff') format('woff'),
+  url('//at.alicdn.com/t/font_467075_zty6uz5hjsrio1or.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_467075_zty6uz5hjsrio1or.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -75,3 +75,7 @@
 .el-icon-hhy-weixin:before { content: "\e717"; }
 /* QQ */
 .el-icon-hhy-qq:before { content: "\e603"; }
+/* 时间 */
+.el-icon-hhy-shijian5:before { content: "\e7d3"; }
+/* 阅读 */
+.el-icon-hhy-yuedu1:before { content: "\e60b"; }

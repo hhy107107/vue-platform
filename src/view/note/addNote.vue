@@ -1,5 +1,5 @@
 <template>
-	<div class="m">
+	<div class="add-note-m">
 		<div>
 			<el-row class="title-bar flex-between" style="margin-bottom: 0px">
 				<el-col :span="19">
@@ -450,6 +450,12 @@
   }
 </script>
 <style>
+  .add-note-m{
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    bottom: 0px;
+  }
   .tag-item{
     cursor: pointer;
   }
@@ -501,9 +507,11 @@
     font-size: 0.9em;
   }
   .title-bar{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    height: 50px;
+    height: 57px;
+    background-color: #ffffff;
+    display: flex;
+    padding: 0px 120px;
+    justify-content: space-between;
   }
   textarea {
     border: none;

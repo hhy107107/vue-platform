@@ -12,29 +12,34 @@
         <img src="../assets/image/login-banner-cloud.png" class="banner-icon">
       </div>
       <div class="login-box">
-        <div class="login-box-title">账号登录</div>
-        <div class="login-box-info">登录账号使用更多功能</div>
+        <div class="login-box-title">快速注册</div>
+        <div class="login-box-info">快速注册一个账号，体验小黄平台</div>
         <div>
           <el-input
-            placeholder="手机号/邮箱/用户名"
+            placeholder="用户名"
             prefix-icon="iconfont el-icon-hhy-touxiang1"
-            v-model="inputUsername">
+            v-model="inputRegisterUsername">
+          </el-input>
+          <el-input class="margin-top-twenty"
+            placeholder="邮箱"
+            prefix-icon="iconfont el-icon-hhy-touxiang1"
+            v-model="inputRegisterEmail">
           </el-input>
           <el-input class="margin-top-twenty"
             placeholder="6~18位字母和数字组合"
             prefix-icon="iconfont el-icon-hhy-mima"
-            v-model="inputPassword">
+            v-model="inputRegisterPassword">
           </el-input>
-          <div class="login-btn" @click="loginUser">登 录</div>
+          <div class="login-btn" @click="registerUser">注 册</div>
           <div class="register-text">
-            <div class="forget" @click="forgetPwd">忘记密码</div>
-            <div class="register" @click="goToRegister">注册账号</div>
+            <!-- <div class="forget">忘记密码</div> -->
+            <div class="register" @click="goToLogin">已有账号，直接登录</div>
           </div>
-          <div class="login-fast-line"></div>
+          <!-- <div class="login-fast-line"></div>
           <div class="login-fast">
             <i class="iconfont el-icon-hhy-weixin fast-icon-weixin"></i>
             <i class="iconfont el-icon-hhy-qq  fast-icon-qq"></i>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -42,34 +47,33 @@
 </template>
 
 <script>
+  import querystring from 'querystring'
   export default {
     data () {
       return {
-        activeName: 'first',
-        inputUsername: '',
-        inputPassword: ''
+        inputRegisterUsername: '',
+        inputRegisterPassword: '',
+        inputRegisterEmail: ''
       }
     },
     methods: {
-      loginUser () {
-        // 登录
-        this.$https.get(`/common/login?username=${this.inputUsername}&password=${this.inputPassword}`)
+      registerUser () {
+        // 注册
+        this.$https.post(`/common/register`, querystring.stringify({
+          username: this.inputRegisterUsername,
+          password: this.inputRegisterUsername,
+          email: this.inputRegisterEmail
+        }))
         .then(res => {
           if (res.data.code === 1) {
-            // 成功
-            this.$message('登录成功')
-            this.$router.push('/home')
+            this.$message('用户注册成功，请登录邮箱进行验证')
           } else {
-            // 失败
             this.$message(res.data.message)
           }
         })
       },
-      goToRegister () {
-        this.$router.push('/register')
-      },
-      forgetPwd () {
-        // 忘记密码
+      goToLogin () {
+        this.$router.push('/login')
       }
     }
   }

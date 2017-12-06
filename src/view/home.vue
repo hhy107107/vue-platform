@@ -39,16 +39,24 @@
     <div class="home-banner">
       <img src="../assets/image/banner.png" class="banner-img">
     </div>
+    <el-popover
+      ref="popover2"
+      placement="bottom"
+      title="标题"
+      width="200"
+      trigger="click"
+      content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
+    </el-popover>
     <div class="home-content">
       <div class="all-model-text">全部模块</div>
       <div class="all-model">
-        <div v-for="(item, index) in appList" class="model">
+        <div v-for="(item, index) in appList" class="model" v-popover:popover2 @click="modelClick(item.link)">
           <i class="iconfont model-icon" :class="item.icon"></i>
           <span>{{item.name}}</span>
         </div>
       </div>
     </div>
-    <div class="footer"></div>
+
   </div>
 </template>
 
@@ -69,7 +77,7 @@ export default {
   data () {
     return {
       appList: [
-        {'id': 'm1', 'name': '笔记本', 'link': '/note', 'icon': 'el-icon-hhy-bijiben'},
+        {'id': 'm1', 'name': '笔记本', 'link': '/essay', 'icon': 'el-icon-hhy-bijiben'},
         {'id': 'm2', 'name': '客服中心', 'link': '/chat', 'icon': 'el-icon-hhy-xiaoxi'},
         {'id': 'm3', 'name': '客服后台', 'link': '/chatManager', 'icon': 'el-icon-hhy-kefu1'},
         {'id': 'm3', 'name': '其他', 'link': '/chatManager', 'icon': 'el-icon-hhy-qita'},
@@ -88,6 +96,9 @@ export default {
     }
   },
   methods: {
+    modelClick (path) {
+      this.$router.push(path)
+    },
     handleCommand (command) {
       if (command === 'a') {
         this.goToUserCenter()
@@ -144,7 +155,7 @@ export default {
   width: 1177px;
   display: flex;
   flex-wrap: wrap;
-  background-color: #fcfcfc;
+  background-color: #fafafa;
   border-left: 1px solid #ededed;
   border-bottom: 1px solid #ededed;
   margin-bottom: 40px;
