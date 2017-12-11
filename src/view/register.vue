@@ -11,9 +11,9 @@
         <!-- <img src="../assets/image/login-banner-icon2.png" class="banner-icon"> -->
         <img src="../assets/image/login-banner-cloud.png" class="banner-icon">
       </div>
-      <div class="login-box">
-        <div class="login-box-title">快速注册</div>
-        <div class="login-box-info">快速注册一个账号，体验小黄平台</div>
+      <div class="register-box">
+        <div class="register-box-title">快速注册</div>
+        <div class="register-box-info">快速注册一个账号，体验小黄平台</div>
         <div>
           <el-input
             placeholder="用户名"
@@ -126,18 +126,18 @@
   display: flex;
   justify-content: flex-end;
 }
-.login-box{
+.register-box{
   background-color: #fff;
   margin: 60px 100px;
   height: 340px;
   width: 340px;
   padding: 20px 40px;
 }
-.login-box-title{
+.register-title{
   font-size: 1.2em;
   margin-bottom: 20px;
 }
-.login-box-info{
+.register-info{
   font-size: 0.9em;
   color: #a2aaac;
   margin-bottom: 10px;

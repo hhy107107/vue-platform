@@ -1,17 +1,15 @@
 <template>
-  <div class="m">
-    <el-row class="title-bar flex-between" style="margin-bottom: 0px">
-      <el-col :span="24">
-        <div class="div-flex">
-          <div class="font-big-module pointer" @click="goHome">Home</div>
-          <div class="font-middle-module">-客服处理中心</div>
-          <i class="iconfont el-icon-hhy-kefu kefu-icon"></i>
-          <!-- <img src="../assets/image/icon_note.png" class="icon-top"> -->
-        </div>
-      </el-col>
-    </el-row>
+  <div class="chat-manager-m">
+    <div class="title-bar">
+      <div class="div-flex">
+        <i class="iconfont el-icon-hhy-yun font-icon"></i><span class="chat-manager-font-title" @click="goToHome">小黄平台</span>
+        <div class="chat-manager-font-title-message">-&nbsp;&nbsp;&nbsp;客服处理中心</div>
+        <!-- <i class="iconfont el-icon-hhy-yonghu kefu-icon"></i> -->
+        <!-- <img src="../assets/image/icon_note.png" class="icon-top"> -->
+      </div>
+    </div>
     <div class="line-horizontal"></div>
-    <div class="mai3">
+    <div class="chat-manager-main">
       <div class="height-100">
         <el-col :span="4" class="left height-100">
           <div class="online">当前在线：3</div>
@@ -66,7 +64,7 @@ export default {
     }
   },
   methods: {
-    goHome () {
+    goToHome () {
       this.$router.push('/')
     },
     selectUser (item) {
@@ -138,25 +136,29 @@ export default {
 </script>
 
 <style lang="scss">
+  .chat-manager-m{
+    height: 100%;
+    width: 100%;
+    background-color: #f7f7f7;
+  }
   html,body{
     height: 100%;
   }
-  .title-bar{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    height: 50px;
-  }
-  .font-middle-module{
-    font-size:1.0em;
-    margin-left:10px;
-  }
-  .font-big-module{
-    font-size:1.5em;
-    margin-left:30px;
-  }
-  .kefu-icon{
-    color: rgb(238, 160, 16);
+  .chat-manager-font-title-message{
+    color: #fff;
+    font-size:0.9em;
     margin-left: 10px;
+  }
+  .chat-manager-font-title{
+    font-size:1.1em;
+    color: #ffffff;
+    cursor: pointer;
+  }
+  .font-icon{
+    color: #ffffff;
+    font-size: 1.5em;
+    margin-right: 6px;
+    font-weight: bold;
   }
   .user-icon{
     font-size: 22px;
@@ -173,8 +175,10 @@ export default {
     padding-bottom: 10px;
     color: rgb(177, 177, 177)
   }
-  .main3{
-    height: 100%;
+  .chat-manager-main{
+    margin: 0px 120px;
+    background-color: #fff;
+    min-height: 670px;
   }
   .user-item{
     padding: 10px;

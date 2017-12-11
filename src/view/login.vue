@@ -25,6 +25,14 @@
             prefix-icon="iconfont el-icon-hhy-mima"
             v-model="inputPassword">
           </el-input>
+          <div class="code margin-top-twenty">
+            <el-input 
+              placeholder="输入右边图片里的验证码"
+              prefix-icon="iconfont el-icon-hhy-mima"
+              v-model="inputCode">
+            </el-input>
+            <img :src="getCode" class="code-img" @click="getCode2">
+          </div>
           <div class="login-btn" @click="loginUser">登 录</div>
           <div class="register-text">
             <div class="forget" @click="forgetPwd">忘记密码</div>
@@ -47,13 +55,24 @@
       return {
         activeName: 'first',
         inputUsername: '',
-        inputPassword: ''
+        inputPassword: '',
+        inputCode: '',
+        date: ''
+      }
+    },
+    computed: {
+      getCode: function () {
+        var path = document.querySelector('#contextPath').value
+        return `${path}/common/getCode?data=${this.date}`
       }
     },
     methods: {
+      getCode2 () {
+        this.date = new Date()
+      },
       loginUser () {
         // 登录
-        this.$https.get(`/common/login?username=${this.inputUsername}&password=${this.inputPassword}`)
+        this.$https.get(`/common/login?username=${this.inputUsername}&password=${this.inputPassword}&code=${this.inputCode}`)
         .then(res => {
           if (res.data.code === 1) {
             // 成功
@@ -76,6 +95,15 @@
 </script>
 
 <style>
+.code-img{
+  width: 80px;
+  height: 40px;
+  margin-left: 40px;
+}
+.code{
+  display: flex;
+  align-items: center;
+}
 .font-title-message{
   color: #fff;
 }
@@ -125,7 +153,7 @@
 .login-box{
   background-color: #fff;
   margin: 60px 100px;
-  height: 340px;
+  height: 400px;
   width: 340px;
   padding: 20px 40px;
 }

@@ -1,10 +1,10 @@
 <template>
-  <div class="m">
-    <el-row class="title-bar flex-between" style="margin-bottom: 0px">
+  <div class="note-detail-m">
+    <el-row class="note-detail-title-bar flex-between" style="margin-bottom: 0px">
       <el-col :span="24">
         <div class="div-flex">
-          <div class="bg-purple font-big-module">Home</div>
-          <div class="font-middle-module">-笔记详情</div>
+          <div class="note-detail-title" @click="goToHome">Home</div>
+          <div class="note-detail-message">-笔记详情</div>
           <img src="../../assets/image/icon_note.png" class="icon-top">
         </div>
       </el-col>
@@ -35,7 +35,7 @@
             <img src="../../assets/image/triangle_right.png" class="label-triangle">
           </div>
           <div class="white margin-left-ten div-flex-column-center user-content">
-            <img :src="userface" class="pictures">
+            <img :src="userface" class="note-detail-pictures">
             <div class="user-name">{{user.name}}</div>
             <el-tag type="warning" class="margin-top-ten">{{user.noteGradeName}}</el-tag>
             <div class="user-info margin-twenty">{{user.signature}}</div>
@@ -75,6 +75,9 @@
       }
     },
     methods: {
+      goToHome () {
+        this.$router.push('/home')
+      },
       initData () {
         this.$https.get(`/initData?needNoteGrade=true`)
         .then(res => {
@@ -138,6 +141,13 @@
   }
 </script>
 <style>
+  .note-detail-m{
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    bottom: 0px;
+    min-height: 800px;
+  }
   .note-zaned{
     color: #ae0123;
   }
@@ -171,7 +181,7 @@
     display: flex;
     flex-direction: column;
   }
-  .pictures{
+  .note-detail-pictures{
     height: 50px;
     width: 50px;
     border-radius: 50px;
@@ -229,18 +239,19 @@
   .right-detail{
     width: 18%;
   }
-  .title-bar{
+  .note-detail-title-bar{
     padding-top: 10px;
     padding-bottom: 10px;
     height: 50px;
   }
-  .font-middle-module{
+  .note-detail-message{
     font-size:1.0em;
     margin-left:10px;
   }
-  .font-big-module{
+  .note-detail-title{
     font-size:1.5em;
     margin-left:30px;
+    cursor: pointer;
   }
   .kefu-icon{
     color: rgb(238, 160, 16);

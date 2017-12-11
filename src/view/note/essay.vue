@@ -2,8 +2,8 @@
   <div class="height-100 bg">
     <div class="title-bar">
       <div class="div-flex">
-        <i class="iconfont el-icon-hhy-yun font-icon"></i><span class="mine-font-title" @click="goToHome">小黄平台</span>
-        <div class="mine-font-title-message">-&nbsp;&nbsp;&nbsp;笔记本</div>
+        <i class="iconfont el-icon-hhy-yun font-icon"></i><span class="essay-font-title" @click="goToHome">小黄平台</span>
+        <div class="essay-font-title-message">-&nbsp;&nbsp;&nbsp;笔记本</div>
         <!-- <i class="iconfont el-icon-hhy-yonghu kefu-icon"></i> -->
         <!-- <img src="../assets/image/icon_note.png" class="icon-top"> -->
       </div>
@@ -45,7 +45,7 @@
                 <el-collapse class="collapse-hhy" v-model="activeNames" @change="handleChange">
                   <el-collapse-item :key=item.id v-for="(item, index) in essayList" :title="item.title" :name="item.id">
                     <div>{{item.content}}</div>
-                    <div class="text-algin-right">查看更多</div>
+                    <div class="show-more" @click="noteClick(item)">查看更多</div>
                   </el-collapse-item>
                 </el-collapse>
               </el-col>
@@ -84,8 +84,8 @@
         </el-pagination>
       </div>
       <div class="div-flex-column-center margin-left-forty">
-        <el-button type="warning" icon="el-icon-edit" style="margin-left: 4px;" v-on:click="addNote"></el-button>
-        <el-button type="primary" icon="el-icon-share" class="margin-top-ten" v-on:click="testHeight"></el-button>
+        <el-button id="add-note" type="warning" icon="iconfont el-icon-hhy-bi" style="margin-left: 4px;" v-on:click="addNote"></el-button>
+        <el-button id="square" type="primary" icon="iconfont el-icon-hhy-guangchangsquare154" class="margin-top-ten" v-on:click="testHeight"></el-button>
       </div>
     </el-row>
   </div>
@@ -111,6 +111,9 @@
       }
     },
     methods: {
+      goToHome () {
+        this.$router.push('/')
+      },
       // 时间戳转事件
       getDate (date) {
         return dateFormat(date, 'yyyy-MM-dd')
@@ -163,11 +166,12 @@
         this.$router.push({path: '/addNote'})
       },
       testHeight: function () {
-        this.$router.push({path: '/testHeight'})
+        // this.$router.push({path: '/testHeight'})
+        this.$router.push({path: '/noteSquare'})
       },
       handleChange () {
         // 当热门推荐被修改的时候
-        this.$message('s' + this.essayList[0].id)
+        // this.$message('s' + this.essayList[0].id)
       }
     },
     computed: {
@@ -175,6 +179,23 @@
   }
 </script>
 <style>
+  #add-note{
+    width: 50px;
+    height: 40px;
+    padding: 0px;
+  }
+  #square{
+    width: 50px;
+    height: 40px;
+    padding: 0px;
+  }
+  .show-more{
+    text-align: right;
+    padding-right: 20px;
+    font-size: 0.9em;
+    cursor: pointer;
+    color: rgb(138, 125, 125);
+  }
   .essay-main-left{
     min-width: 240px;
   }
@@ -207,12 +228,12 @@
     display: flex;
     justify-content: space-between;
   }
-  .mine-font-title-message{
+  .essay-font-title-message{
     color: #fff;
     font-size:0.9em;
     margin-left: 10px;
   }
-  .mine-font-title{
+  .essay-font-title{
     font-size:1.1em;
     color: #ffffff;
     cursor: pointer;

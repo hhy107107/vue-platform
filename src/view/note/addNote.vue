@@ -1,7 +1,7 @@
 <template>
 	<div class="add-note-m">
 		<div>
-			<el-row class="title-bar flex-between" style="margin-bottom: 0px">
+			<el-row class="add-note-title-bar flex-between" style="margin-bottom: 0px">
 				<el-col :span="19">
           <div class="div-flex">
             <div class="font-big-module pointer" @click="goHome">Home</div>
@@ -506,11 +506,11 @@
     color: #666666;
     font-size: 0.9em;
   }
-  .title-bar{
+  .add-note-title-bar{
     height: 57px;
     background-color: #ffffff;
     display: flex;
-    padding: 0px 120px;
+    padding: 0px 0px;
     justify-content: space-between;
   }
   textarea {
@@ -558,7 +558,6 @@
     width: 100%;
     border-radius: 0px;
     padding-left: 32px;
-    
   }
   .el-input2 .el-input-group__append, .el-input-group__prepend {
     background-color: #f5f7fa;
@@ -584,6 +583,9 @@
     padding: 20px;
     height: 100%;
   }
+  #editor{
+    min-height: 600px;
+  }
   .editor{
     height: calc(100% - 160px);
   }
@@ -598,6 +600,7 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    color: #555555;
   }
   .icon:hover{
     background-color: #cccccc;
