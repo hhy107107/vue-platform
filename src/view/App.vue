@@ -158,7 +158,7 @@
         inputRegisterEmail: '',
         user: null,
         isLogin: false,
-        bannerList: [{url: 'http://127.0.0.1/static/banner/banner1.jpg'}, {url: 'http://127.0.0.1/static/banner/banner2.jpg'}, {url: 'http://127.0.0.1/static/banner/banner3.jpg'}]
+        bannerList: [{url: 'http://39.108.176.184/static/banner/banner1.jpg'}, {url: 'http://39.108.176.184/static/banner/banner2.jpg'}, {url: 'http://39.108.176.184/static/banner/banner3.jpg'}]
       }
     },
     methods: {
@@ -230,7 +230,7 @@
     },
     computed: {
       appList () {
-        return [{'id': 'm1', 'name': '笔记本', 'link': '/note', 'icon': 'http://127.0.0.1/static/icon/model-note.png'}, {'id': 'm2', 'name': '客服中心', 'link': '/chat', 'icon': 'http://127.0.0.1/static/icon/model-message.png'}, {'id': 'm3', 'name': '客服后台', 'link': '/chatManager', 'icon': 'http://127.0.0.1/static/icon/model-service.png'}]
+        return [{'id': 'm1', 'name': '笔记本', 'link': '/note', 'icon': 'http://39.108.176.184/static/icon/model-note.png'}, {'id': 'm2', 'name': '客服中心', 'link': '/chat', 'icon': 'http://39.108.176.184/static/icon/model-message.png'}, {'id': 'm3', 'name': '客服后台', 'link': '/chatManager', 'icon': 'http://39.108.176.184/static/icon/model-service.png'}]
       }
     }
   }

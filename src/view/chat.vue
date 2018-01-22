@@ -67,7 +67,7 @@
           var msg = JSON.parse(evt.data)
           if (msg.type === 'CHAT') {
             // 是聊天消息
-            this.chatContent += 'Received message: ' + JSON.parse(evt.data).message + '!\n'
+            this.chatContent += 'Received message: ' + JSON.parse(evt.data).message + '\n'
           } else if (msg.type === 'PUSH') {
             // 是推送
             var tag = msg.tag

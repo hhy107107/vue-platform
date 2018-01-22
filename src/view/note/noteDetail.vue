@@ -84,7 +84,7 @@
           if (res.data.code === 1) {
             // 成功
             this.user = res.data.result
-            this.userface = 'http://127.0.0.1/static/' + this.user.userface
+            this.userface = 'http://39.108.176.184/static/' + this.user.userface
           }
         })
       },
@@ -146,7 +146,6 @@
     width: 100%;
     top: 0px;
     bottom: 0px;
-    min-height: 800px;
   }
   .note-zaned{
     color: #ae0123;
@@ -205,6 +204,7 @@
     display: flex;
     justify-content: space-between;
     background-color: rgb(247, 247, 247);
+    min-height: 700px;
   }
   .note{
     padding: 20px 0px 20px 0px;
@@ -225,6 +225,7 @@
     font-size: 1.2em;
     color: #464646;
     padding: 20px;
+    height: 100%;
   }
   .note-date{
     color: #666666;

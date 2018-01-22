@@ -19,7 +19,7 @@
           <i class="iconfont el-icon-hhy-sousuo search-icon"></i>
         </div>
         <el-dropdown @command="handleCommand">
-          <img :src="userface" class="pictures">
+          <img :src="userface" class="note-square-pictures">
           <el-dropdown-menu slot="dropdown" id="pictures">
             <el-dropdown-item command="a">个人中心</el-dropdown-item>
             <el-dropdown-item command="b">退出登录</el-dropdown-item>
@@ -32,12 +32,13 @@
       <div class="note-square-center-left">
         <el-carousel class="note-square-banner">
           <el-carousel-item v-for="item in bannerList" :key="item">
-              <img :src=item.url class="banner-img">
+              <img :src=item.url class="square-banner-img">
           </el-carousel-item>
         </el-carousel>
         <div class="proficient-label-bg">
           <div class="proficient-label-left-line"></div>
           <div class="proficient-label">学霸推荐</div>
+          <div class="proficient-more" @click="goToMoreProficient">更多</div>
         </div>
         <div class="note-square-proficient-bg">
           <div class="note-square-proficient">
@@ -119,7 +120,7 @@
       </div>
       <div class="note-square-content-card-list">
         <div :key=item.name v-for="(item, index) in essayList" :value="item.name">
-          <div @click.native="noteClick(item)" class="note-square-content-card">
+          <div @click="noteClick(item)" class="note-square-content-card">
             <div class="note-square-essay-title">
               {{item.title}}
             </div>
@@ -141,7 +142,7 @@
           </div> 
         </div>  
       </div>
-      <el-pagination class="margin-top-twenty pagination"
+      <el-pagination class="margin-top-twenty note-square-pagination"
         layout="prev, pager, next"
         @current-change="pageChange"
         :total="allNoteCount">
@@ -182,8 +183,8 @@
         {add: false, title: '中科创达3100万欧元收购图像视觉公司MMS（全球最大的移动和工业图形图像视觉技术公司之一）'},
         {add: false, title: '考拉阅读获近千万美元 A 轮融资，将打造“AI+阅读”研究院'},
         {add: true, title: 'IT 行业加班，到底有没有价值？'}],
-        bannerList: [{url: 'http://127.0.0.1/static/banner/banner1.jpg'}, {url: 'http://127.0.0.1/static/banner/banner2.jpg'}, {url: 'http://127.0.0.1/static/banner/banner3.jpg'}],
-        proficientList: [{introduce: '考试满分率99%的学霸,乐于分享', userface: 'http://127.0.0.1/static/userface/face1.jpg', name: '徐大统'}, {introduce: '智商最高的小黄，解决问题能力一流', userface: 'http://127.0.0.1/static/userface/face2.jpg', name: '黄小黄'}, {introduce: '情商最高的小新，在校三年，交友2W', userface: 'http://127.0.0.1/static/userface/face3.jpg', name: '陈小新'}, {introduce: '网络红人赵铁柱,直播写作业月入百万', userface: 'http://127.0.0.1/static/userface/face4.jpg', name: '赵铁柱'}]
+        bannerList: [{url: 'http://39.108.176.184/static/banner/banner1.jpg'}, {url: 'http://39.108.176.184/static/banner/banner2.jpg'}, {url: 'http://39.108.176.184/static/banner/banner3.jpg'}],
+        proficientList: [{introduce: '考试满分率99%的学霸,乐于分享', userface: 'http://39.108.176.184/static/userface/face1.jpg', name: '徐大统'}, {introduce: '智商最高的小黄，解决问题能力一流', userface: 'http://39.108.176.184/static/userface/face2.jpg', name: '黄小黄'}, {introduce: '情商最高的小新，在校三年，交友2W', userface: 'http://39.108.176.184/static/userface/face3.jpg', name: '陈小新'}, {introduce: '网络红人赵铁柱,直播写作业月入百万', userface: 'http://39.108.176.184/static/userface/face4.jpg', name: '赵铁柱'}]
       }
     },
     created () {
@@ -193,7 +194,7 @@
         if (res.data.code === 1) {
           // 成功
           this.user = res.data.result
-          this.userface = 'http://127.0.0.1/static/' + this.user.userface
+          this.userface = 'http://39.108.176.184/static/' + this.user.userface
         } else {
           // 失败
         }
@@ -202,6 +203,12 @@
     computed: {
     },
     methods: {
+      goToMoreProficient () {
+        this.$router.push('/proficient')
+      },
+      noteClick (item) {
+        this.$router.push({path: '/noteDetail', query: {noteId: item.id}})
+      },
       clearSelect () {
         this.sortTime = false
         this.sortZan = false
@@ -439,7 +446,6 @@
   color: #000;
   font-size: 1.1em;
   text-align: center;
-
 }
 .note-square-proficient-bg{
   background-color: #fff;
@@ -480,10 +486,18 @@
   padding: 6px;
   /* background: linear-gradient(to right, rgb(235, 235, 235), white); color: #fff; */
   font-size: 1.0em;
-  width: 200px;
   color: rgb(218, 170, 40);
 }
-.banner-img{
+.proficient-more{
+  color: rgb(201, 200, 194);
+  font-size: 0.9em;
+  cursor: pointer;
+}
+.proficient-more:hover{
+  color: rgb(218, 170, 40);
+  font-size: 0.9em;
+}
+.square-banner-img{
   width: 100%;  
   height: 240px;
 }
@@ -525,7 +539,7 @@
   font-size: 0.9em;
   color: #46ba81;
 }
-.pagination{
+.note-square-pagination{
   text-align: right;
 }
 .note-square-content-card{
@@ -614,7 +628,7 @@
   color: #fff;
   padding: 0px;
 }
-.pictures{
+.note-square-pictures{
   height: 40px;
   width: 40px;
   border-radius: 50px;

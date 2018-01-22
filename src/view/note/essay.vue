@@ -7,6 +7,15 @@
         <!-- <i class="iconfont el-icon-hhy-yonghu kefu-icon"></i> -->
         <!-- <img src="../assets/image/icon_note.png" class="icon-top"> -->
       </div>
+      <div class="div-flex">
+        <el-dropdown @command="handleTitleBarCommand">
+          <img :src="userface" class="note-essay-pictures" >
+          <el-dropdown-menu slot="dropdown" id="pictures">
+            <el-dropdown-item command="a">个人中心</el-dropdown-item>
+            <el-dropdown-item command="b">退出登录</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
     </div>
     <el-row class="essay-main">
       <div>
@@ -55,7 +64,7 @@
       <div class="div-flex-column-right2  width-100 essay-main-center">
         <div class="margin-left-twenty content-card-list">
           <div :key=item.name v-for="(item, index) in essayList" :value="item.name">
-            <div @click.native="noteClick(item)" class="content-card">
+            <div @click="noteClick(item)" class="content-card">
               <div class="essay-title">
                 {{item.title}}
               </div>
@@ -111,6 +120,19 @@
       }
     },
     methods: {
+      handleTitleBarCommand (command) {
+        if (command === 'a') {
+          this.goToUserCenter()
+        } else if (command === 'b') {
+          this.goToLogin()
+        }
+      },
+      goToUserCenter () {
+        this.$router.push('/mine')
+      },
+      goToLogin () {
+        this.$router.push('/login')
+      },
       goToHome () {
         this.$router.push('/')
       },
@@ -124,7 +146,7 @@
           if (res.data.code === 1) {
             // 成功
             this.user = res.data.result
-            this.userface = 'http://127.0.0.1/static/' + this.user.userface
+            this.userface = 'http://39.108.176.184/static/' + this.user.userface
           }
         })
       },
@@ -179,6 +201,12 @@
   }
 </script>
 <style>
+  .note-essay-pictures{
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    cursor: pointer;
+  }
   #add-note{
     width: 50px;
     height: 40px;

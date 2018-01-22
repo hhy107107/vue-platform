@@ -1,11 +1,11 @@
 
 @font-face {
   font-family: 'iconfont';  /* project id 467075 */
-  src: url('//at.alicdn.com/t/font_467075_benthvghv02akyb9.eot');
-  src: url('//at.alicdn.com/t/font_467075_benthvghv02akyb9.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_467075_benthvghv02akyb9.woff') format('woff'),
-  url('//at.alicdn.com/t/font_467075_benthvghv02akyb9.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_467075_benthvghv02akyb9.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_467075_753hj6fc45fxn7b9.eot');
+  src: url('//at.alicdn.com/t/font_467075_753hj6fc45fxn7b9.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_467075_753hj6fc45fxn7b9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_467075_753hj6fc45fxn7b9.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_467075_753hj6fc45fxn7b9.svg#iconfont') format('svg');
   
 }
 
@@ -96,3 +96,7 @@
 .el-icon-hhy-jiangxu1:before { content: "\e713"; }
 /* 降序2 */
 .el-icon-hhy-jiangxu2:before { content: "\e67d"; }
+/* 箭头，圆 */
+.el-icon-hhy-jiantou1:before { content: "\e689"; }
+/* 等级 */
+.el-icon-hhy-dengji:before { content: "\e665"; }

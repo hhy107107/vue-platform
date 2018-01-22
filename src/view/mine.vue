@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="line-horizontal"></div>
-    <div class="m3">
+    <div class="mine-m3">
       <div class="mine-left">
         <el-menu 
           default-active="personal"
@@ -70,13 +70,13 @@
             </div>
             <div class="personal-right">
               <el-upload
-                class="avatar-uploader"
+                class="mine-avatar-uploader"
                 :action="getUploadApi"
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload">
-                <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                <img v-if="imageUrl" :src="imageUrl" class="mine-avatar">
+                <i v-else class="el-icon-plus mine-avatar-uploader-icon"></i>
               </el-upload>
               <div class="flex-center margin-top-ten">
                 <el-button type="warning" size="small" round @click="changeFace">保存头像</el-button>
@@ -86,13 +86,13 @@
         </div>
         <div id="account" :class="{'menu-hiddle': menuKey === 'personal'}">
           <div class="m-account">
-            <div class="font">
-              <div>
-                <i class="iconfont el-icon-hhy-zhanghao icon"></i>
+            <div class="mine-font">
+              <div class="div-flex">
+                <i class="iconfont el-icon-hhy-zhanghao mine-icon"></i>
                 <span class="text">账号：</span><span class="text">{{username}}</span>
               </div>
-              <div class="margin-left-twenty">
-                <i class="iconfont el-icon-hhy-youxiang icon"></i>
+              <div class="margin-left-twenty div-flex">
+                <i class="iconfont el-icon-hhy-youxiang mine-icon"></i>
                 <span class="text">邮箱：</span><span class="text">{{email}}</span>
               </div>
             </div>
@@ -182,7 +182,7 @@
               { validator: validatePass2, trigger: 'blur' }
             ]
           },
-          fileBaseUrl: 'http://127.0.0.1/static/',
+          fileBaseUrl: 'http://39.108.176.184/static/',
           imageUrl: '',
           fileUrl: '',
           user: '',
@@ -221,7 +221,7 @@
         getUploadApi: function () {
           var path = document.querySelector('#contextPath').value
           return `${path}/upload`
-          // return 'http://127.0.0.1:8080/smallyellow/upload'
+          // return 'http://39.108.176.184:8080/smallyellow/upload'
         }
       },
       methods: {
@@ -371,10 +371,10 @@
     .el-menu{
       border: 0px solid #e6e6e6;
     }
-    .m3{
+    .mine-m3{
       padding: 0px 120px;
       display: flex;
-      min-height: 640px;
+      min-height: 740px;
       height: 100%;
       background-color: #f8f8f8;
     }
@@ -426,17 +426,17 @@
     #account{
       height: 100%;
     }
-    .icon{
+    .mine-icon{
       width: 20px;
-      height: 40px;
       color: #0f8fe4;
+      margin-right: 2px;
       font-size: 1.0em;
       text-align: center;
     }
-    .font{
+    .mine-font{
       color: #0f8fe4;
       font-size: 1.0em;
-      padding: 20px 20px 0px 20px;
+      padding: 20px 20px 20px 20px;
       display: flex;
     }
     .text{
@@ -468,23 +468,28 @@
       height: 100%;
       background-color: #fff;
     }
-    .avatar-uploader{
+    .mine-avatar-uploader{
       display: flex;
       flex-direction: column;
       align-content: center;
       align-items: center;
     }
-    .avatar-uploader .el-upload {
+    .mine-avatar-uploader .el-upload {
       border: 1px dashed #d9d9d9;
       border-radius: 6px;
       cursor: pointer;
       position: relative;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 200px;
+      height: 200px;
     }
-    .avatar-uploader .el-upload:hover {
-      border-color: #409EFF;
+    .mine-avatar-uploader .el-upload:hover {
+      border-color: rgb(37, 128, 28);
     }
-    .avatar-uploader-icon {
+    .mine-avatar-uploader-icon {
       font-size: 28px;
       color: #8c939d;
       width: 178px;
@@ -492,7 +497,7 @@
       line-height: 178px;
       text-align: center;
     }
-    .avatar {
+    .mine-avatar {
       width: 178px;
       height: 178px;
       display: block;

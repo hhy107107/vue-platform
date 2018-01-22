@@ -16,6 +16,8 @@ import home from '../view/home.vue'
 import login from '../view/login.vue'
 import register from '../view/register.vue'
 import noteSquare from '../view/note/noteSquare.vue'
+import proficient from '../view/note/proficient.vue'
+import proficientApply from '../view/note/proficientApply.vue'
 
 Vue.use(Router)
 
@@ -48,6 +50,8 @@ export default new Router({
     {path: '/register', component: register},
     {path: '/personal', component: personal},
     {path: '/account', component: account},
-    {path: '/noteSquare', component: noteSquare}
+    {path: '/noteSquare', component: noteSquare},
+    {path: '/proficient', component: proficient},
+    {path: '/proficientApply', component: proficientApply}
   ]
 })

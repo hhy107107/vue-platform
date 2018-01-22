@@ -5,7 +5,7 @@
           <i class="iconfont el-icon-hhy-yun font-icon"></i><span class="font-title pointer">小黄平台</span>
           <div class="header-left2">
             <div v-for="(menu, index) in menuList2" 
-              :key="menu" class="menu-item-left" 
+              :key="menu.name" class="menu-item-left" 
               :class="{'menu-item-left-activate': menu.selected}" @click="selectedMenu(menu.id)">
               <div>{{menu.name}}</div>
               <!-- <div class="item-selected-line"></div> -->
@@ -19,9 +19,7 @@
             <div>
               <el-input id="search"
                 placeholder="输入搜索内容"
-                icon="search"
-                v-model="input2"
-                :on-icon-click="handleIconClick">
+                v-model="inputSerch">
               </el-input> 
             </div>
             <i class="iconfont el-icon-hhy-sousuo search-icon"></i>
@@ -68,7 +66,7 @@ export default {
       if (res.data.code === 1) {
         // 成功
         this.user = res.data.result
-        this.userface = 'http://127.0.0.1/static/' + this.user.userface
+        this.userface = 'http://39.108.176.184/static/' + this.user.userface
       } else {
         // 失败
       }
@@ -92,7 +90,8 @@ export default {
       ],
       menuList2: [{'id': '0', 'name': '首页', 'selected': true}, {'id': '1', 'name': '关于我们', 'selected': false}, {'id': '2', 'name': '支持', 'selected': false}, {'id': '3', 'name': '翻译', 'selected': false}],
       user: null,
-      userface: ''
+      userface: '',
+      inputSerch: ''
     }
   },
   methods: {
