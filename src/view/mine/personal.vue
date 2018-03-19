@@ -83,7 +83,7 @@
       },
       data () {
         return {
-          fileBaseUrl: 'http://127.0.0.1/static/',
+          fileBaseUrl: 'http://39.108.176.184/static/',
           imageUrl: '',
           fileUrl: '',
           user: '',
@@ -122,7 +122,7 @@
         getUploadApi: function () {
           var path = document.querySelector('#contextPath').value
           return `${path}/upload`
-          // return 'http://127.0.0.1:8080/smallyellow/upload'
+          // return 'http://39.108.176.184:8080/smallyellow/upload'
         }
       },
       methods: {
@@ -178,6 +178,7 @@
               // 提交修改
               this.changeUser()
             } else {
+              this.$message('error submit!!')
               console.log('error submit!!')
               return false
             }

@@ -1,17 +1,15 @@
 <template>
-  <div class="m">
-    <el-row class="title-bar flex-between" style="margin-bottom: 0px">
-      <el-col :span="24">
-        <div class="div-flex">
-          <div class="font-big-module pointer" @click="goHome">Home</div>
-          <div class="font-middle-module">-客服服务中心</div>
-          <i class="iconfont el-icon-hhy-kefu kefu-icon"></i>
-          <!-- <img src="../assets/image/icon_note.png" class="icon-top"> -->
-        </div>
-      </el-col>
-    </el-row>
+  <div class="chat-m">
+    <div class="title-bar">
+      <div class="div-flex">
+        <i class="iconfont el-icon-hhy-yun font-icon"></i><span class="chat-font-title" @click="goToHome">小黄平台</span>
+        <div class="chat-font-title-message">-&nbsp;&nbsp;&nbsp;客服中心</div>
+        <!-- <i class="iconfont el-icon-hhy-yonghu kefu-icon"></i> -->
+        <!-- <img src="../assets/image/icon_note.png" class="icon-top"> -->
+      </div>
+    </div>
     <div class="line-horizontal"></div>
-    <div class="main">
+    <div class="main2">
       <el-input
         type="textarea"
         :rows="10"
@@ -54,7 +52,7 @@
 
     },
     methods: {
-      goHome () {
+      goToHome () {
         this.$router.push('/')
       },
       connectChat () {
@@ -69,7 +67,7 @@
           var msg = JSON.parse(evt.data)
           if (msg.type === 'CHAT') {
             // 是聊天消息
-            this.chatContent += 'Received message: ' + JSON.parse(evt.data).message + '!\n'
+            this.chatContent += 'Received message: ' + JSON.parse(evt.data).message + '\n'
           } else if (msg.type === 'PUSH') {
             // 是推送
             var tag = msg.tag
@@ -106,13 +104,40 @@
 </script>
 
 <style lang="scss">
+  .font-icon{
+    color: #ffffff;
+    font-size: 1.5em;
+    margin-right: 6px;
+    font-weight: bold;
+  }
+  .chat-font-title-message{
+    color: #fff;
+    font-size:0.9em;
+    margin-left: 10px;
+  }
+  .chat-font-title{
+    font-size:1.1em;
+    color: #ffffff;
+    cursor: pointer;
+  }
+  .chat-m{
+    height: 100%;
+    width: 100%;
+    min-height: 800px;
+  }
+  .main2{
+    height: 100%;
+    padding: 20px 60px 20px 60px;
+  }
   html,body{
     height: 100%;
   }
-  .title-bar{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    height: 50px;
+  .chat-title-bar{
+    height: 57px;
+    background-color: #009966;
+    display: flex;
+    padding: 0px 120px;
+    justify-content: space-between;
   }
   .font-middle-module{
     font-size:1.0em;

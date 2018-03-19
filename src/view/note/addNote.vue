@@ -1,7 +1,7 @@
 <template>
-	<div class="m">
+	<div class="add-note-m">
 		<div>
-			<el-row class="title-bar flex-between" style="margin-bottom: 0px">
+			<el-row class="add-note-title-bar flex-between" style="margin-bottom: 0px">
 				<el-col :span="19">
           <div class="div-flex">
             <div class="font-big-module pointer" @click="goHome">Home</div>
@@ -215,7 +215,7 @@
       getUploadApi: function () {
         var path = document.querySelector('#contextPath').value
         return `${path}/upload`
-        // return 'http://127.0.0.1:8080/smallyellow/upload'
+        // return 'http://39.108.176.184:8080/smallyellow/upload'
       },
       getUploadApiForPoint: function () {
         var path = document.querySelector('#contextPath').value
@@ -450,6 +450,12 @@
   }
 </script>
 <style>
+  .add-note-m{
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    bottom: 0px;
+  }
   .tag-item{
     cursor: pointer;
   }
@@ -500,10 +506,12 @@
     color: #666666;
     font-size: 0.9em;
   }
-  .title-bar{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    height: 50px;
+  .add-note-title-bar{
+    height: 57px;
+    background-color: #ffffff;
+    display: flex;
+    padding: 0px 0px;
+    justify-content: space-between;
   }
   textarea {
     border: none;
@@ -550,7 +558,6 @@
     width: 100%;
     border-radius: 0px;
     padding-left: 32px;
-    
   }
   .el-input2 .el-input-group__append, .el-input-group__prepend {
     background-color: #f5f7fa;
@@ -576,6 +583,9 @@
     padding: 20px;
     height: 100%;
   }
+  #editor{
+    min-height: 600px;
+  }
   .editor{
     height: calc(100% - 160px);
   }
@@ -590,6 +600,7 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    color: #555555;
   }
   .icon:hover{
     background-color: #cccccc;

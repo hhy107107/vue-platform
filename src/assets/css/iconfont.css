@@ -1,11 +1,12 @@
 
 @font-face {
   font-family: 'iconfont';  /* project id 467075 */
-  src: url('//at.alicdn.com/t/font_467075_d054hfv6kihpvi.eot');
-  src: url('//at.alicdn.com/t/font_467075_d054hfv6kihpvi.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_467075_d054hfv6kihpvi.woff') format('woff'),
-  url('//at.alicdn.com/t/font_467075_d054hfv6kihpvi.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_467075_d054hfv6kihpvi.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_467075_753hj6fc45fxn7b9.eot');
+  src: url('//at.alicdn.com/t/font_467075_753hj6fc45fxn7b9.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_467075_753hj6fc45fxn7b9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_467075_753hj6fc45fxn7b9.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_467075_753hj6fc45fxn7b9.svg#iconfont') format('svg');
+  
 }
 
 .iconfont {
@@ -63,3 +64,39 @@
 .el-icon-hhy-zan:before { content: "\e625"; }
 /* 阅读 */
 .el-icon-hhy-yuedu:before { content: "\e731"; }
+/* 退出登录 */
+.el-icon-hhy-nav-my-login-out:before { content: "\e601"; }
+/* 云 */
+.el-icon-hhy-yun:before { content: "\e617"; }
+/* 搜索 */
+.el-icon-hhy-sousuo:before { content: "\e616"; }
+/* 其他 */
+.el-icon-hhy-qita:before { content: "\e602"; }
+/* 微信 */
+.el-icon-hhy-weixin:before { content: "\e717"; }
+/* QQ */
+.el-icon-hhy-qq:before { content: "\e603"; }
+/* 时间 */
+.el-icon-hhy-shijian5:before { content: "\e7d3"; }
+/* 阅读 */
+.el-icon-hhy-yuedu1:before { content: "\e60b"; }
+/* 广场 */
+.el-icon-hhy-guangchangsquare154:before { content: "\e623"; }
+/* 笔 */
+.el-icon-hhy-bi:before { content: "\e62e"; }
+/* 升序和降序 */
+.el-icon-hhy-jiage:before { content: "\e611"; }
+/* 升序 */
+.el-icon-hhy-053caozuo_shengxu:before { content: "\e621"; }
+/* 降序 */
+.el-icon-hhy-052caozuo_jiangxu:before { content: "\e620"; }
+/* 清除 */
+.el-icon-hhy-qingchu:before { content: "\e607"; }
+/* 降序 */
+.el-icon-hhy-jiangxu1:before { content: "\e713"; }
+/* 降序2 */
+.el-icon-hhy-jiangxu2:before { content: "\e67d"; }
+/* 箭头，圆 */
+.el-icon-hhy-jiantou1:before { content: "\e689"; }
+/* 等级 */
+.el-icon-hhy-dengji:before { content: "\e665"; }
