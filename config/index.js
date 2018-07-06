@@ -35,9 +35,9 @@ module.exports = {
       '/smallyellow': {
         changeOrigin: true,
         target: 'http://127.0.0.1:9999',
-        pathRewrite: {
-          '^smallyellow': '/smallyellow'
-        }
+        // pathRewrite: {
+        //   '^smallyellow': 'smallyellow'
+        // }
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

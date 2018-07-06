@@ -70,14 +70,31 @@
       getCode2 () {
         this.date = new Date()
       },
+      connectIm (username, password) {
+        // 测试
+        // var socket = new WebSocket("ws:"+ip+":"+port+"?username="+username+"&password="+password)
+        var wsUri = `ws://localhost:9998?username=${this.inputUsername}&password=${this.inputPassword}`
+        this.chatWebsocket = new WebSocket(wsUri)
+        this.chatWebsocket.onopen = (evt) => {
+          this.$message('成功onopen')
+          this.$router.push('/home')
+        }
+        this.chatWebsocket.onmessage = (evt) => {
+          this.$message('成功onmessage')
+        }
+        this.chatWebsocket.onerror = (evt) => {
+          this.$message('成功onerror')
+        }
+      },
       loginUser () {
         // 登录
         this.$https.get(`/common/login?username=${this.inputUsername}&password=${this.inputPassword}&code=${this.inputCode}`)
         .then(res => {
           if (res.data.code === 1) {
             // 成功
-            this.$message('登录成功')
-            this.$router.push('/home')
+            this.$message('登录成功,开始登录聊天服务器')
+            this.connectIm()
+            // this.$router.push('/home')
           } else {
             // 失败
             this.$message(res.data.message)

@@ -146,7 +146,7 @@
           if (res.data.code === 1) {
             // 成功
             this.user = res.data.result
-            this.userface = 'http://39.108.176.184/static/' + this.user.userface
+            this.userface = 'http://127.0.0.1/static/' + this.user.userface
           }
         })
       },

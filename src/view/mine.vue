@@ -182,7 +182,7 @@
               { validator: validatePass2, trigger: 'blur' }
             ]
           },
-          fileBaseUrl: 'http://39.108.176.184/static/',
+          fileBaseUrl: 'http://127.0.0.1/static/',
           imageUrl: '',
           fileUrl: '',
           user: '',
@@ -221,7 +221,7 @@
         getUploadApi: function () {
           var path = document.querySelector('#contextPath').value
           return `${path}/upload`
-          // return 'http://39.108.176.184:8080/smallyellow/upload'
+          // return 'http://127.0.0.1:8080/smallyellow/upload'
         }
       },
       methods: {

@@ -18,6 +18,8 @@ import register from '../view/register.vue'
 import noteSquare from '../view/note/noteSquare.vue'
 import proficient from '../view/note/proficient.vue'
 import proficientApply from '../view/note/proficientApply.vue'
+import communtion from '../view/communion.vue'
+import testfile from '../view/testfile.vue'
 
 Vue.use(Router)
 
@@ -52,6 +54,8 @@ export default new Router({
     {path: '/account', component: account},
     {path: '/noteSquare', component: noteSquare},
     {path: '/proficient', component: proficient},
-    {path: '/proficientApply', component: proficientApply}
+    {path: '/proficientApply', component: proficientApply},
+    {path: '/communtion', component: communtion},
+    {path: '/testfile', component: testfile}
   ]
 })

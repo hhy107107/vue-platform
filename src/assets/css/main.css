@@ -99,6 +99,11 @@ min-width: 800px;
     width: 100%;
     background-color: #eeeeec;
 }
+.line-horizontal2{
+    height: 1px;
+    width: 100%;
+    background-color: #f6f6f6;
+}
 .red-bg{
     background-color: #dd1134 !important;
 }

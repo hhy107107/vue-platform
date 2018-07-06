@@ -183,8 +183,8 @@
         {add: false, title: '中科创达3100万欧元收购图像视觉公司MMS（全球最大的移动和工业图形图像视觉技术公司之一）'},
         {add: false, title: '考拉阅读获近千万美元 A 轮融资，将打造“AI+阅读”研究院'},
         {add: true, title: 'IT 行业加班，到底有没有价值？'}],
-        bannerList: [{url: 'http://39.108.176.184/static/banner/banner1.jpg'}, {url: 'http://39.108.176.184/static/banner/banner2.jpg'}, {url: 'http://39.108.176.184/static/banner/banner3.jpg'}],
-        proficientList: [{introduce: '考试满分率99%的学霸,乐于分享', userface: 'http://39.108.176.184/static/userface/face1.jpg', name: '徐大统'}, {introduce: '智商最高的小黄，解决问题能力一流', userface: 'http://39.108.176.184/static/userface/face2.jpg', name: '黄小黄'}, {introduce: '情商最高的小新，在校三年，交友2W', userface: 'http://39.108.176.184/static/userface/face3.jpg', name: '陈小新'}, {introduce: '网络红人赵铁柱,直播写作业月入百万', userface: 'http://39.108.176.184/static/userface/face4.jpg', name: '赵铁柱'}]
+        bannerList: [{url: 'http://127.0.0.1/static/banner/banner1.jpg'}, {url: 'http://127.0.0.1/static/banner/banner2.jpg'}, {url: 'http://127.0.0.1/static/banner/banner3.jpg'}],
+        proficientList: [{introduce: '考试满分率99%的学霸,乐于分享', userface: 'http://127.0.0.1/static/userface/face1.jpg', name: '徐大统'}, {introduce: '智商最高的小黄，解决问题能力一流', userface: 'http://127.0.0.1/static/userface/face2.jpg', name: '黄小黄'}, {introduce: '情商最高的小新，在校三年，交友2W', userface: 'http://127.0.0.1/static/userface/face3.jpg', name: '陈小新'}, {introduce: '网络红人赵铁柱,直播写作业月入百万', userface: 'http://127.0.0.1/static/userface/face4.jpg', name: '赵铁柱'}]
       }
     },
     created () {
@@ -194,7 +194,7 @@
         if (res.data.code === 1) {
           // 成功
           this.user = res.data.result
-          this.userface = 'http://39.108.176.184/static/' + this.user.userface
+          this.userface = 'http://127.0.0.1/static/' + this.user.userface
         } else {
           // 失败
         }

@@ -103,7 +103,7 @@
         if (res.data.code === 1) {
           // 成功
           this.user = res.data.result
-          this.userface = 'http://39.108.176.184/static/' + this.user.userface
+          this.userface = 'http://127.0.0.1/static/' + this.user.userface
         } else {
           // 失败
         }
@@ -120,16 +120,16 @@
         {goodat: [{name: '一年级'}, {name: '二年级'}], grade: [{name: 'N1'}, {name: 'N2'}, {name: 'N3'}, {name: 'N4'}, {name: 'N5'}], name: '日语'},
         {goodat: [{name: '一年级'}, {name: '二年级'}], grade: [{name: '一年级'}, {name: '二年级'}], name: '英国历史'}],
         userface: '',
-        newProficientList: [{url: 'http://39.108.176.184/static/userface/face1.jpg'}, {url: 'http://39.108.176.184/static/userface/face2.jpg'}, {url: 'http://39.108.176.184/static/userface/face3.jpg'}],
+        newProficientList: [{url: 'http://127.0.0.1/static/userface/face1.jpg'}, {url: 'http://127.0.0.1/static/userface/face2.jpg'}, {url: 'http://127.0.0.1/static/userface/face3.jpg'}],
         proficientList: [
-          {introduce: '考试满分率99%的学霸,乐于分享', userface: 'http://39.108.176.184/static/userface/face1.jpg', name: '徐大统'},
-          {introduce: '智商最高的小黄，解决问题能力一流', userface: 'http://39.108.176.184/static/userface/face2.jpg', name: '黄小黄'},
-          {introduce: '情商最高的小新，在校三年，交友2W', userface: 'http://39.108.176.184/static/userface/face3.jpg', name: '陈小新'},
-          {introduce: '网络红人赵铁柱,直播写作业月入百万', userface: 'http://39.108.176.184/static/userface/face4.jpg', name: '赵铁柱'},
-          {introduce: '考试满分率99%的学霸,乐于分享', userface: 'http://39.108.176.184/static/userface/face1.jpg', name: '徐大统'},
-          {introduce: '智商最高的小黄，解决问题能力一流', userface: 'http://39.108.176.184/static/userface/face2.jpg', name: '黄小黄'},
-          {introduce: '情商最高的小新，在校三年，交友2W', userface: 'http://39.108.176.184/static/userface/face3.jpg', name: '陈小新'},
-          {introduce: '网络红人赵铁柱,直播写作业月入百万', userface: 'http://39.108.176.184/static/userface/face4.jpg', name: '赵铁柱'}
+          {introduce: '考试满分率99%的学霸,乐于分享', userface: 'http://127.0.0.1/static/userface/face1.jpg', name: '徐大统'},
+          {introduce: '智商最高的小黄，解决问题能力一流', userface: 'http://127.0.0.1/static/userface/face2.jpg', name: '黄小黄'},
+          {introduce: '情商最高的小新，在校三年，交友2W', userface: 'http://127.0.0.1/static/userface/face3.jpg', name: '陈小新'},
+          {introduce: '网络红人赵铁柱,直播写作业月入百万', userface: 'http://127.0.0.1/static/userface/face4.jpg', name: '赵铁柱'},
+          {introduce: '考试满分率99%的学霸,乐于分享', userface: 'http://127.0.0.1/static/userface/face1.jpg', name: '徐大统'},
+          {introduce: '智商最高的小黄，解决问题能力一流', userface: 'http://127.0.0.1/static/userface/face2.jpg', name: '黄小黄'},
+          {introduce: '情商最高的小新，在校三年，交友2W', userface: 'http://127.0.0.1/static/userface/face3.jpg', name: '陈小新'},
+          {introduce: '网络红人赵铁柱,直播写作业月入百万', userface: 'http://127.0.0.1/static/userface/face4.jpg', name: '赵铁柱'}
         ]
       }
     },

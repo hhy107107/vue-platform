@@ -66,7 +66,7 @@ export default {
       if (res.data.code === 1) {
         // 成功
         this.user = res.data.result
-        this.userface = 'http://39.108.176.184/static/' + this.user.userface
+        this.userface = 'http://127.0.0.1/static/' + this.user.userface
       } else {
         // 失败
       }
@@ -78,8 +78,8 @@ export default {
         {'id': 'm1', 'name': '笔记本', 'link': '/essay', 'icon': 'el-icon-hhy-bijiben'},
         {'id': 'm2', 'name': '客服中心', 'link': '/chat', 'icon': 'el-icon-hhy-xiaoxi'},
         {'id': 'm3', 'name': '客服后台', 'link': '/chatManager', 'icon': 'el-icon-hhy-kefu1'},
-        {'id': 'm3', 'name': '其他', 'link': '/chatManager', 'icon': 'el-icon-hhy-qita'},
-        {'id': 'm3', 'name': '其他', 'link': '/chatManager', 'icon': 'el-icon-hhy-qita'},
+        {'id': 'm3', 'name': '交流大厅', 'link': '/communtion', 'icon': 'el-icon-hhy-qita'},
+        {'id': 'm3', 'name': '测试文件夹上传', 'link': '/testfile', 'icon': 'el-icon-hhy-qita'},
         {'id': 'm3', 'name': '其他', 'link': '/chatManager', 'icon': 'el-icon-hhy-qita'},
         {'id': 'm3', 'name': '其他', 'link': '/chatManager', 'icon': 'el-icon-hhy-qita'},
         {'id': 'm3', 'name': '其他', 'link': '/chatManager', 'icon': 'el-icon-hhy-qita'},

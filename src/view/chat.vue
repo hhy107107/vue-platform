@@ -90,7 +90,7 @@
         this.doSend(this.chatInput)
       },
       doSend (message) {
-        var ms = '{"type":"CHAT","to":"0","from":"' + this.user.id + '","message":"' + message + '"}'
+        var ms = '{"type":"CHAT","to":"6","from":"' + this.user.id + '","message":"' + message + '"}'
         this.chatWebsocket.send(ms)
         this.chatContent += 'Send message: ' + message
         this.chatContent += '\n'
