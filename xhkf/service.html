@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>小黄在线客服</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- 引入 Bootstrap -->
+      <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <link href="./css/main.css" rel="stylesheet">
+      
+      <!-- HTML5 Shiv 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
+      <!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
+      <!--[if lt IE 9]>
+         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      <![endif]-->
+   </head>
+   <body>
+      <div class="bg">
+        <div class="content container">
+          <div class="left">
+            <div class="left-mine">
+              <img src="./image/temp_userface.png">
+              <span id="fromUserId">临时用户</span>
+              <div class="search">
+                <input type="text" placeholder="请输入用户名">
+                <img src="./image/icon_search.png">
+              </div>
+            </div>
+            <div class="left-user">
+              <ul id="serviceList"></ul>
+            </div>
+          </div>
+          <div class="center">
+            <div class="center-right-top">
+
+            </div>
+            <div class="center-content">
+              <ul id="chatList">
+              </ul>
+              <div class="input-area">
+                <div class="btn-line">
+                  <img src="./image/icon_face_g.png" onmouseover="this.src='./image/icon_face_o.png'" onmouseout="this.src='./image/icon_face_g.png'">
+                  <img src="./image/icon_img_g.png" onmouseover="this.src='./image/icon_img_o.png'" onmouseout="this.src='./image/icon_img_g.png'">
+                  <img src="./image/icon_review_g.png" onmouseover="this.src='./image/icon_review_o.png'" onmouseout="this.src='./image/icon_review_g.png'">
+                </div>
+                <textarea id="inputText" rows="2"></textarea>
+                <div class="btn-group"  id="sendBtnGroup">
+                  <button type="button" id="sendBtn" class="btn btn-default">
+                    <font>发送</font>
+                    <button type="button" id="sendBtnImg" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></button>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Entry发送</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Ctrl+Entry发送</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="right">
+            <div class="center-right-top">
+                <button type="button" id="loginServer" class="btn btn-default">
+                    <font>客服登录</font>
+                </button>
+            </div>
+            <div class="right-content">
+
+            </div>
+          </div>
+        </div>
+        <div class="bottom">
+          Copyright © 2017-2018 XH All Right Reserved 小黄smallyellow.me 版权所有
+        </div>
+      </div>
+      <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+
+      <script src="./jquery/jquery.js"></script>
+      <!-- 包括所有已编译的插件 -->
+      <script src="./bootstrap/js/bootstrap.bundle.js"></script>
+      <script src="./bootstrap/js/bootstrap.min.js"></script>
+      <script src="./js/service.js"></script>
+   </body>
+</html>

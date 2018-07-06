@@ -9,6 +9,8 @@ import noteDetail from '../view/note/noteDetail.vue'
 import testHeight from '../view/note/testHeight.vue'
 import chat from '../view/chat.vue'
 import chatManager from '../view/chatManager.vue'
+import chat2 from '../view/chat2.vue'
+import chatManager2 from '../view/chatManager2.vue'
 import mine from '../view/mine.vue'
 import personal from '../view/mine/personal.vue'
 import account from '../view/mine/account.vue'
@@ -52,6 +54,8 @@ export default new Router({
     {path: '/account', component: account},
     {path: '/noteSquare', component: noteSquare},
     {path: '/proficient', component: proficient},
-    {path: '/proficientApply', component: proficientApply}
+    {path: '/proficientApply', component: proficientApply},
+    {path: '/chat2', component: chat2},
+    {path: '/chatManager2', component: chatManager2}
   ]
 })
